@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Mikro.ViewModels.PostFormViewModel>
+
+@foreach(var post in Model)
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            @post.PostedOn.ToString("MMM d")
+        </div>
+        <div class="panel-body">@post.Content</div>
+    </div>
+}

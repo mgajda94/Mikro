@@ -1,0 +1,18 @@
+﻿@model Mikro.ViewModels.PostFormViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    using (Html.BeginForm("Index", "Mikro"))
+    {
+        <div class="form-group">
+            @Html.EditorFor(m => m.Content, new { @class = "form-control" })
+            <button type="submit" class="btn btn-primary">Wyslij</button>
+        </div>
+    }
+}
+
+@Html.Partial("_DisplayingPostsPartial")
