@@ -10,6 +10,8 @@ namespace Mikro.Models
 
         public ApplicationUser User { get; set; }
 
+        public string Username { get; set; }
+
         public string UserId { get; set; }
 
         public DateTime PostedOn { get; set; }
@@ -23,7 +25,6 @@ namespace Mikro.Models
         public int PlusCounter { get; set; }
 
         public IList<Comment> Comment { get; set; }
-
 
     }
 }

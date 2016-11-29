@@ -1,11 +1,14 @@
-﻿@model IEnumerable<Mikro.ViewModels.PostFormViewModel>
+﻿@model Mikro.ViewModels.PostFormViewModel
 
-@foreach(var post in Model)
+@foreach(var post in Model.Posts)
 {
-    <div class="panel panel-default">
+    <div class="panel panel-info">
         <div class="panel-heading">
-            @post.PostedOn.ToString("MMM d")
+            @post.PostedOn.ToString("MMM d yyyy") | Added by <b>@post.Username</b>
         </div>
         <div class="panel-body">@post.Content</div>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="@Url.Action("Post", "Mikro", new { id = post.Id})">Add coment</a></li>
+        </ul>
     </div>
 }
