@@ -18,6 +18,7 @@ namespace Mikro.Models
 
         public DateTime? Modifed { get; set; }
 
+        [DataType(DataType.MultilineText)]
         public string Content { get; set; }
 
         public string Meta { get; set; }

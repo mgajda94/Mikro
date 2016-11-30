@@ -1,8 +1,6 @@
-﻿using System;
+﻿using Mikro.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Mikro.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace Mikro.ViewModels

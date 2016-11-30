@@ -3,9 +3,7 @@
     ViewBag.Title = "Post";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h2>Post</h2>
-
 
 @foreach (var post in Model.Posts)
 {
@@ -13,18 +11,19 @@
         <div class="panel-heading">
             @post.PostedOn.ToString("MMM d yyyy"), Added by <b> @post.Username </b>
         </div>
-        <div class="panel-body">@post.Content</div>
+        <div class="panel-body">@Html.Raw(post.Content.Replace(Environment.NewLine, "<br/>"))</div>
     </div>
 }
 @Html.Partial("_DisplayingCommentsPartial")
-
 @if (User.Identity.IsAuthenticated)
 {
     using (Html.BeginForm("Post", "Mikro"))
     {
         <div class="form-group">
-            @Html.EditorFor(m => m.Content, new { @class = "form-control" })
-            <button type="submit" class="btn btn-primary">Wyslij</button>
+            @Html.TextAreaFor(m => m.Content, 5, 100, null)
+            <div>
+                <button type="submit" class="btn btn-primary">Wyslij</button>
+            </div>
         </div>
     }
 }

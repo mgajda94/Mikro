@@ -42,9 +42,7 @@ namespace Mikro.Controllers
                 Content = viewmodel.Content,
                 PlusCounter = 0
             };
-
             
-
             _context.Posts.Add(post);
             _context.SaveChanges();
 

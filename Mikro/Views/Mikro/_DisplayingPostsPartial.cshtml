@@ -6,7 +6,7 @@
         <div class="panel-heading">
             @post.PostedOn.ToString("MMM d yyyy") | Added by <b>@post.Username</b>
         </div>
-        <div class="panel-body">@post.Content</div>
+        <div class="panel-body">@Html.Raw(post.Content.Replace(Environment.NewLine, "<br/>"))</div>
         <ul class="list-group">
             <li class="list-group-item"><a href="@Url.Action("Post", "Mikro", new { id = post.Id})">Add coment</a></li>
         </ul>
