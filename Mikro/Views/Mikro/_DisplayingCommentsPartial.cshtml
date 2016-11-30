@@ -1,0 +1,15 @@
+﻿@model Mikro.ViewModels.CommentFormViewModel
+@{
+    ViewBag.Title = "_DisplayingCommentsPartial";
+}
+
+@foreach (var comment in Model.Comments)
+{
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            @comment.PostedOn.ToString("MMM d yyyy") | Added by <b>@comment.UserName</b>
+        </div>
+        <div class="panel-body">@comment.Content</div>
+    </div>
+}
+

@@ -1,4 +1,4 @@
-﻿@model Mikro.ViewModels.PostFormViewModel
+﻿@model Mikro.ViewModels.CommentFormViewModel
 @{
     ViewBag.Title = "Post";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -16,6 +16,7 @@
         <div class="panel-body">@post.Content</div>
     </div>
 }
+@Html.Partial("_DisplayingCommentsPartial")
 
 @if (User.Identity.IsAuthenticated)
 {

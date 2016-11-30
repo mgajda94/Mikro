@@ -226,9 +226,14 @@
     <Compile Include="Migrations\201611281922251_AddedUsernameToPostModel.Designer.cs">
       <DependentUpon>201611281922251_AddedUsernameToPostModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611300943322_EditCommentModel.cs" />
+    <Compile Include="Migrations\201611300943322_EditCommentModel.Designer.cs">
+      <DependentUpon>201611300943322_EditCommentModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Comment.cs" />
+    <Compile Include="ViewModels\CommentFormViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Post.cs" />
@@ -297,6 +302,7 @@
     <Content Include="Views\Mikro\Index.cshtml" />
     <Content Include="Views\Mikro\_DisplayingPostsPartial.cshtml" />
     <Content Include="Views\Mikro\Post.cshtml" />
+    <Content Include="Views\Mikro\_DisplayingCommentsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -327,6 +333,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611281922251_AddedUsernameToPostModel.resx">
       <DependentUpon>201611281922251_AddedUsernameToPostModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611300943322_EditCommentModel.resx">
+      <DependentUpon>201611300943322_EditCommentModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

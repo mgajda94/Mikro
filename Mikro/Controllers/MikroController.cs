@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNet.Identity;
 using Mikro.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 using Mikro.ViewModels;
-using System.Web.Security;
+using System;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace Mikro.Controllers
 {
@@ -51,24 +48,44 @@ namespace Mikro.Controllers
             _context.Posts.Add(post);
             _context.SaveChanges();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Mikro");
         }
 
         [Route("Mikro/Post/{id:int}")]
         public ActionResult Post(int id)
         {
-            var viewModel = new PostFormViewModel
-            {
-                Posts = _context.Posts.Where(x => x.Id == id).ToList()
+            var viewModel = new CommentFormViewModel { 
+                Posts = _context.Posts.Where(x => x.Id == id).ToList(),
+                Comments = _context.Comments.Where(x => x.PostId == id).OrderBy(x=> x.PostedOn).ToList()
             };
+
             return View(viewModel);
         }
 
-        [HttpPost]
+
         [Route("Mikro/Post/{id:int}")]
-        public ActionResult Post(int id)
+        [HttpPost]
+        public ActionResult Post(int id, CommentFormViewModel viewModel)
         {
-            
+           if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            var comment = new Comment
+            {
+                UserId = User.Identity.GetUserId(),
+                PostId = id,
+                UserName = User.Identity.GetUserName(),
+                PostedOn = DateTime.Now,
+                Content = viewModel.Content,
+                PlusCounter = 0,
+            };
+
+            _context.Comments.Add(comment);
+            _context.SaveChanges();
+
+            return RedirectToAction("Post", "Mikro");
         }
     }    
 }
