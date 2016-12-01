@@ -42,7 +42,7 @@ namespace Mikro.Controllers
                 Content = viewmodel.Content,
                 PlusCounter = 0
             };
-            
+
             _context.Posts.Add(post);
             _context.SaveChanges();
 
@@ -56,6 +56,9 @@ namespace Mikro.Controllers
                 Posts = _context.Posts.Where(x => x.Id == id).ToList(),
                 Comments = _context.Comments.Where(x => x.PostId == id).OrderBy(x=> x.PostedOn).ToList()
             };
+
+            if (viewModel.Posts == null)
+                return HttpNotFound();
 
             return View(viewModel);
         }
@@ -84,6 +87,17 @@ namespace Mikro.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("Post", "Mikro");
+        }
+
+        [Route("Mikro/Post/Edit/{id:int}")]
+        public ActionResult EditPost(int id)
+        {
+            var post = _context.Posts.Find(id);
+
+            if (post == null)
+                return HttpNotFound();
+
+            return View(post);
         }
     }    
 }
