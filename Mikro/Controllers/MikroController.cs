@@ -25,7 +25,7 @@ namespace Mikro.Controllers
 
             var viewModel = new PostFormViewModel
             {
-                Posts = _context.Posts.ToList()
+                Posts = _context.Posts.OrderByDescending(x=>x.PostedOn).ToList()
             };
 
             return View(viewModel);
@@ -132,6 +132,15 @@ namespace Mikro.Controllers
             Post post = _context.Posts.Find(id);
             _context.Posts.Remove(post);
             _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult PlusPost(int id)
+        {
+            var post = _context.Posts.Find(id);
+            var user = _context.Users.Find(User.Identity.GetUserId());
+            post.PlusUsers.Add(user);
 
             return RedirectToAction("Index");
         }
