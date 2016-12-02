@@ -4,6 +4,8 @@ using Mikro.ViewModels;
 using System;
 using System.Linq;
 using System.Web.Mvc;
+using System.Data.Entity;
+using System.Net;
 
 namespace Mikro.Controllers
 {
@@ -18,6 +20,9 @@ namespace Mikro.Controllers
 
         public ActionResult Index()
         {
+            var actualUserId = User.Identity.GetUserId();
+            ViewBag.actualUserId = actualUserId;
+
             var viewModel = new PostFormViewModel
             {
                 Posts = _context.Posts.ToList()
@@ -53,8 +58,12 @@ namespace Mikro.Controllers
         public ActionResult Post(int id)
         {
             var viewModel = new CommentFormViewModel { 
-                Posts = _context.Posts.Where(x => x.Id == id).ToList(),
-                Comments = _context.Comments.Where(x => x.PostId == id).OrderBy(x=> x.PostedOn).ToList()
+                Posts = _context.Posts.Where(x => x.Id == id)
+                .ToList(),
+
+                Comments = _context.Comments
+                .Where(x => x.PostId == id)
+                .OrderBy(x=> x.PostedOn).ToList()
             };
 
             if (viewModel.Posts == null)
@@ -90,14 +99,41 @@ namespace Mikro.Controllers
         }
 
         [Route("Mikro/Post/Edit/{id:int}")]
-        public ActionResult EditPost(int id)
+        public ActionResult EditPost(int id, PostFormViewModel viewModel)
         {
+            
             var post = _context.Posts.Find(id);
 
-            if (post == null)
+            if (post == null | post.UserId != User.Identity.GetUserId())
                 return HttpNotFound();
 
             return View(post);
+        }
+
+        [HttpPost]
+        public ActionResult EditPost(PostFormViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            var post = _context.Posts.Find(viewModel.Id);
+            post.Content = viewModel.Content;
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+
+        [Route("Mikro/Post/Delete/{id:int}")]
+        public ActionResult Delete(int id)
+        {
+            Post post = _context.Posts.Find(id);
+            _context.Posts.Remove(post);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }    
 }

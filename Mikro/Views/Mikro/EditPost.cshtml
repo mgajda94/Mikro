@@ -1,0 +1,25 @@
+﻿@model Mikro.Models.Post
+@{
+    ViewBag.Title = "EditPost";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit your Post</h2>
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    using (Html.BeginForm())
+    {
+        <div>
+            @Html.LabelFor(x => x.Content)
+        </div>
+        <div>
+            @Html.EditorFor(x => x.Content)
+            @Html.ValidationMessageFor(x => x.Content)
+        </div>
+        <p>
+            <input type="submit" value="Edit" />
+        </p>
+    }
+}

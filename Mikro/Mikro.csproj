@@ -307,6 +307,7 @@
     <Content Include="Views\Mikro\_DisplayingPostsPartial.cshtml" />
     <Content Include="Views\Mikro\Post.cshtml" />
     <Content Include="Views\Mikro\_DisplayingCommentsPartial.cshtml" />
+    <Content Include="Views\Mikro\EditPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
