@@ -234,6 +234,14 @@
     <Compile Include="Migrations\201611301447348_UpdatePostMethod.Designer.cs">
       <DependentUpon>201611301447348_UpdatePostMethod.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612052136073_EditPostModel.cs" />
+    <Compile Include="Migrations\201612052136073_EditPostModel.Designer.cs">
+      <DependentUpon>201612052136073_EditPostModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612052210390_EditPostModel1.cs" />
+    <Compile Include="Migrations\201612052210390_EditPostModel1.Designer.cs">
+      <DependentUpon>201612052210390_EditPostModel1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Comment.cs" />
@@ -344,6 +352,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611301447348_UpdatePostMethod.resx">
       <DependentUpon>201611301447348_UpdatePostMethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612052136073_EditPostModel.resx">
+      <DependentUpon>201612052136073_EditPostModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612052210390_EditPostModel1.resx">
+      <DependentUpon>201612052210390_EditPostModel1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

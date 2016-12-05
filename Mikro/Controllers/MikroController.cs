@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Data.Entity;
 using System.Net;
+using System.Collections.Generic;
 
 namespace Mikro.Controllers
 {
@@ -23,9 +24,11 @@ namespace Mikro.Controllers
             var actualUserId = User.Identity.GetUserId();
             ViewBag.actualUserId = actualUserId;
 
+
             var viewModel = new PostFormViewModel
             {
-                Posts = _context.Posts.OrderByDescending(x=>x.PostedOn).ToList()
+                Posts = _context.Posts.OrderByDescending(x => x.PostedOn).ToList(),
+                PlusUsers = _context.Posts.SelectMany(x => x.PlusUsers).ToList()
             };
 
             return View(viewModel);
@@ -45,8 +48,8 @@ namespace Mikro.Controllers
                 Username = User.Identity.GetUserName(),
                 PostedOn = DateTime.Now,
                 Content = viewmodel.Content,
-                PlusCounter = 0
-            };
+                PlusUsers = new List<ApplicationUser>()
+        };
 
             _context.Posts.Add(post);
             _context.SaveChanges();
@@ -140,6 +143,12 @@ namespace Mikro.Controllers
         {
             var post = _context.Posts.Find(id);
             var user = _context.Users.Find(User.Identity.GetUserId());
+
+            if(post.PlusUsers == null)
+            {
+                post.PlusUsers = new List<ApplicationUser>();
+            }
+
             post.PlusUsers.Add(user);
 
             return RedirectToAction("Index");

@@ -23,9 +23,7 @@ namespace Mikro.Models
 
         public string Meta { get; set; }
 
-        public int PlusCounter { get; set; }
-
-        public IList<ApplicationUser> PlusUsers { get; set; }
+        public List<ApplicationUser> PlusUsers { get; set; }
 
         public IList<Comment> Comment { get; set; }
 
