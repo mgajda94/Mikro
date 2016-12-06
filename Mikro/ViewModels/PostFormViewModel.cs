@@ -19,6 +19,8 @@ namespace Mikro.ViewModels
 
         public IList<ApplicationUser> PlusUsers { get; set; }
 
+        public IList<Comment> Comment { get; set; }
+
         public IList<Post> Posts { get; set; }
     }
 }

@@ -25,9 +25,7 @@ namespace Mikro.Models
 
         public List<ApplicationUser> PlusUsers { get; set; }
 
-        public IList<Comment> Comment { get; set; }
-
-
+        public List<Comment> Comment { get; set; }
 
     }
 }

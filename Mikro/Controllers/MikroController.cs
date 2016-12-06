@@ -24,11 +24,11 @@ namespace Mikro.Controllers
             var actualUserId = User.Identity.GetUserId();
             ViewBag.actualUserId = actualUserId;
 
-
             var viewModel = new PostFormViewModel
             {
                 Posts = _context.Posts.OrderByDescending(x => x.PostedOn).ToList(),
-                PlusUsers = _context.Posts.SelectMany(x => x.PlusUsers).ToList()
+                PlusUsers = _context.Posts.SelectMany(x => x.PlusUsers).ToList(),
+                Comment = _context.Posts.SelectMany(x => x.Comment).ToList()
             };
 
             return View(viewModel);
@@ -48,8 +48,9 @@ namespace Mikro.Controllers
                 Username = User.Identity.GetUserName(),
                 PostedOn = DateTime.Now,
                 Content = viewmodel.Content,
-                PlusUsers = new List<ApplicationUser>()
-        };
+                PlusUsers = new List<ApplicationUser>(),
+                Comment = new List<Comment>()
+            };
 
             _context.Posts.Add(post);
             _context.SaveChanges();
@@ -95,7 +96,15 @@ namespace Mikro.Controllers
                 PlusCounter = 0,
             };
 
+            var post = _context.Posts.Find(comment.PostId);
+
+            if (post.Comment == null)
+            {
+                post.Comment = new List<Comment>();
+            }
+
             _context.Comments.Add(comment);
+            post.Comment.Add(comment);
             _context.SaveChanges();
 
             return RedirectToAction("Post", "Mikro");
@@ -133,6 +142,10 @@ namespace Mikro.Controllers
         public ActionResult Delete(int id)
         {
             Post post = _context.Posts.Find(id);
+
+            if (post == null | post.UserId != User.Identity.GetUserId())
+                return HttpNotFound();
+
             _context.Posts.Remove(post);
             _context.SaveChanges();
 
@@ -144,14 +157,27 @@ namespace Mikro.Controllers
             var post = _context.Posts.Find(id);
             var user = _context.Users.Find(User.Identity.GetUserId());
 
+            if (post == null | post.UserId != User.Identity.GetUserId())
+                return HttpNotFound();
+
             if(post.PlusUsers == null)
             {
                 post.PlusUsers = new List<ApplicationUser>();
             }
 
+            if (post.PlusUsers.Contains(user))
+            {
+                post.PlusUsers.Remove(user);
+                _context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
             post.PlusUsers.Add(user);
+            _context.SaveChanges();
 
             return RedirectToAction("Index");
         }
+
     }    
 }
