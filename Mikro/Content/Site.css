@@ -1,6 +1,8 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: rgb(27, 27, 27);  
+    color: white;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -20,5 +22,68 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 100%;
+}
+
+textarea {
+    overflow: auto;
+    background-color: #333333;  
+    color: white;
+    height: 60px;
+    border: 2px solid #000000;
+	border-radius: 4px;
+    margin-bottom: 10px;
+    display:block;
+    -webkit-box-shadow: inset 2px 2px 2px 0px #262626;
+    -moz-box-shadow: inset 2px 2px 2px 0px #262626;
+    box-shadow: inset 2px 2px 2px 0px #262626;
+    padding: 6px;
+}
+
+.input:focus {
+    outline: none !important;
+    border:1px solid red;
+    box-shadow: 0 0 10px #719ECE;
+}
+
+.navbar-inverse{
+   
+}
+
+.navbar-inverse 
+.navbar-brand{
+    color: grey;
+}
+
+.navbar-inverse 
+.navbar-nav > li > a {
+    color: grey;
+}
+
+.panel{
+    background-color: #252525;
+}
+
+.panel-info {
+    border-color: #000000;
+}
+
+.panel-info > .panel-heading {
+    color: #6d6d6d;
+    background-color: #333333;
+    border-color: #000000;
+}
+
+.panel > .list-group .list-group-item:last-child {
+    border-bottom: 0;
+    background-color: #333333;
+    border-color: #000000;
+}
+
+.btn-primary{
+    background-color: #333333;
+}
+
+.body-content {
+    background-color: #333333;
 }

@@ -17,7 +17,7 @@
         </div>
         <ul class="list-group">
             <li class="list-group-item">
-                <a href="@Url.Action("Post", "Mikro", new { id = post.Id})">Add coment</a>
+                <a href="@Url.Action("Post", "Mikro", new { id = post.Id})">Add coment ( @Model.Comment.Count() )</a>
             </li>
         </ul>
     </div>

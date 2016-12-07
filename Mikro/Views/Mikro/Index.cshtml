@@ -8,7 +8,7 @@
     using (Html.BeginForm("Index", "Mikro"))
     {
         <div class="form-group">
-            @Html.TextAreaFor(m => m.Content, 5, 100, null)
+            @Html.TextAreaFor(m => m.Content, 5, 900, new { @placeholder = "Enter text here"})
             <div>
                 <button type="submit" class="btn btn-primary">Wyslij</button>
             </div>

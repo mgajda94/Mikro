@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikro", "Mikro\Mikro.csproj", "{BF687B1B-D54A-447F-9121-05F0CA758393}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikro.Tests", "Mikro.Tests\Mikro.Tests.csproj", "{A61F7B7B-E28E-48A4-9755-B26A2289A862}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{BF687B1B-D54A-447F-9121-05F0CA758393}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF687B1B-D54A-447F-9121-05F0CA758393}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF687B1B-D54A-447F-9121-05F0CA758393}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A61F7B7B-E28E-48A4-9755-B26A2289A862}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A61F7B7B-E28E-48A4-9755-B26A2289A862}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A61F7B7B-E28E-48A4-9755-B26A2289A862}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A61F7B7B-E28E-48A4-9755-B26A2289A862}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
