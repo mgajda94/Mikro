@@ -9,12 +9,12 @@ namespace Mikro.Models
 
         public string UserId { get; set; }
 
+        public ApplicationUser User { get; set; }
+
         public string UserName { get; set; }
 
         [Required]
         public int PostId { get; set; }
-
-        public ApplicationUser User { get; set; }
 
         [Required]
         public DateTime PostedOn { get; set; }
