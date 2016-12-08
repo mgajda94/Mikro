@@ -21,11 +21,5 @@ namespace Mikro.Models
         [DataType(DataType.MultilineText)]
         public string Content { get; set; }
 
-        public string Meta { get; set; }
-
-        public List<ApplicationUser> PlusUsers { get; set; }
-
-        public List<Comment> Comment { get; set; }
-
     }
 }

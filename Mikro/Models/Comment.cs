@@ -22,8 +22,5 @@ namespace Mikro.Models
         public DateTime? Modifed { get; set; }
         [Required]
         public string Content { get; set; }
-
-        public string Meta { get; set; }
-        public int PlusCounter { get; set; }
     }
 }

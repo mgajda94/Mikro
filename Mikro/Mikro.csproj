@@ -245,6 +245,8 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\CommentPlus.cs" />
+    <Compile Include="Models\PostPlus.cs" />
     <Compile Include="ViewModels\CommentFormViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
