@@ -12,11 +12,7 @@ namespace Mikro.Tests
         [TestMethod]
         public void TestPlusPosts()
         {
-            var post = new Post
-            {
-                Id = 1,
-                PlusUsers = new List<ApplicationUser>()
-            };
+           
 
             var controller = new MikroController();
             

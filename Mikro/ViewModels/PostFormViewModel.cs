@@ -17,7 +17,7 @@ namespace Mikro.ViewModels
 
         public DateTime PostedOn { get; set; }
 
-        public IList<ApplicationUser> PlusUsers { get; set; }
+        public IList<PostPlus> PostPlus { get; set; }
 
         public IList<Comment> Comment { get; set; }
 

@@ -10,14 +10,16 @@
                   <a href="@Url.Action("EditPost", "Mikro", new { id = post.Id })">Edit Post</a>
                   <a href="@Url.Action("Delete", "Mikro", new { id = post.Id})">Delete Post</a>
             }
-            <a href="@Url.Action("PlusPost", "Mikro", new { id = post.Id })">@Model.PlusUsers.Count()</a>
+            <a href="@Url.Action("PlusPost", "Mikro", new { id = post.Id })">
+                @Model.PostPlus.Where(x => x.Id == post.Id).Count()
+            </a>
         </div>
         <div class="panel-body">
             @Html.Raw(post.Content.Replace(Environment.NewLine, "<br/>"))
         </div>
         <ul class="list-group">
             <li class="list-group-item">
-                <a href="@Url.Action("Post", "Mikro", new { id = post.Id})">Add coment ( @Model.Comment.Count() )</a>
+                <a href="@Url.Action("Post", "Mikro", new { id = post.Id})">Add coment ( Comment )</a>
             </li>
         </ul>
     </div>
