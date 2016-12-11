@@ -59,6 +59,9 @@ namespace Mikro.Controllers
         [Route("Mikro/Post/{id:int}")]
         public ActionResult Post(int id)
         {
+
+            ViewBag.actualUserId = User.Identity.GetUserId();
+
             var viewModel = new CommentFormViewModel { 
                 Posts = _context.Posts.Where(x => x.Id == id)
                 .ToList(),
@@ -137,6 +140,7 @@ namespace Mikro.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         public ActionResult PlusPost(int id)
         {
             var userId = User.Identity.GetUserId();
@@ -144,11 +148,13 @@ namespace Mikro.Controllers
             var pluspost = _context.PostPluses
                 .Where(x => x.PostId == id)
                 .Where(x => x.UserId == userId)
-                .First();
+                .FirstOrDefault();
 
+            var post = _context.Posts.Find(id);
 
             if (pluspost != null)
             {
+                post.PlusCounter -= 1;
                 _context.PostPluses.Remove(pluspost);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
@@ -159,10 +165,43 @@ namespace Mikro.Controllers
                 PostId = id,
                 UserId = userId
             };
-
+            
+            post.PlusCounter += 1;
             _context.PostPluses.Add(plus);
             _context.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [Authorize]
+        public ActionResult PlusComment(int id)
+        {
+            var userId = User.Identity.GetUserId();
+
+            var pluscomment = _context.CommentPluses
+                .Where(x => x.CommentId == id)
+                .Where(x => x.UserId == userId)
+                .FirstOrDefault();
+
+            var comment = _context.Comments.Find(id);
+
+            if (pluscomment != null)
+            {
+                comment.PlusCounter -= 1;
+                _context.CommentPluses.Remove(pluscomment);
+                _context.SaveChanges();
+                return RedirectToAction("Post", new { id = comment.PostId});
+            }
+
+            var plus = new CommentPlus
+            {
+                CommentId = id,
+                UserId = userId
+            };
+
+            comment.PlusCounter += 1;
+            _context.CommentPluses.Add(plus);
+            _context.SaveChanges();
+            return RedirectToAction("Post", new { id = comment.PostId });
         }
     }    
 }

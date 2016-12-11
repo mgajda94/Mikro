@@ -16,6 +16,8 @@ namespace Mikro.Models
 
         public DateTime PostedOn { get; set; }
 
+        public int PlusCounter { get; set; }
+
         public DateTime? Modifed { get; set; }
 
         [DataType(DataType.MultilineText)]

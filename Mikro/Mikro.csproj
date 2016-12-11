@@ -253,6 +253,18 @@
     <Compile Include="Migrations\201612092140462_AddPostPlusAndCommentPlusModels2.Designer.cs">
       <DependentUpon>201612092140462_AddPostPlusAndCommentPlusModels2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612101659410_AddingPlusCounterToPostsModel.cs" />
+    <Compile Include="Migrations\201612101659410_AddingPlusCounterToPostsModel.Designer.cs">
+      <DependentUpon>201612101659410_AddingPlusCounterToPostsModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612101801114_AddingForeignKeyToCommentPlusandPostPlus.cs" />
+    <Compile Include="Migrations\201612101801114_AddingForeignKeyToCommentPlusandPostPlus.Designer.cs">
+      <DependentUpon>201612101801114_AddingForeignKeyToCommentPlusandPostPlus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612101829375_AddPlusCounterToPlusCommentModel.cs" />
+    <Compile Include="Migrations\201612101829375_AddPlusCounterToPlusCommentModel.Designer.cs">
+      <DependentUpon>201612101829375_AddPlusCounterToPlusCommentModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Comment.cs" />
@@ -391,6 +403,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612092140462_AddPostPlusAndCommentPlusModels2.resx">
       <DependentUpon>201612092140462_AddPostPlusAndCommentPlusModels2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612101659410_AddingPlusCounterToPostsModel.resx">
+      <DependentUpon>201612101659410_AddingPlusCounterToPostsModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612101801114_AddingForeignKeyToCommentPlusandPostPlus.resx">
+      <DependentUpon>201612101801114_AddingForeignKeyToCommentPlusandPostPlus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612101829375_AddPlusCounterToPlusCommentModel.resx">
+      <DependentUpon>201612101829375_AddPlusCounterToPlusCommentModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

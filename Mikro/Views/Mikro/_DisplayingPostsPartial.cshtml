@@ -9,10 +9,10 @@
             {
                   <a href="@Url.Action("EditPost", "Mikro", new { id = post.Id })">Edit Post</a>
                   <a href="@Url.Action("Delete", "Mikro", new { id = post.Id})">Delete Post</a>
+                  <a href="@Url.Action("PlusPost", "Mikro", new { id = post.Id })">
+                    @post.PlusCounter </a>
             }
-            <a href="@Url.Action("PlusPost", "Mikro", new { id = post.Id })">
-                @Model.PostPlus.Where(x => x.Id == post.Id).Count()
-            </a>
+               
         </div>
         <div class="panel-body">
             @Html.Raw(post.Content.Replace(Environment.NewLine, "<br/>"))
