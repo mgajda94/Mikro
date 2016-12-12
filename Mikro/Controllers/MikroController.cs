@@ -63,15 +63,14 @@ namespace Mikro.Controllers
             ViewBag.actualUserId = User.Identity.GetUserId();
 
             var viewModel = new CommentFormViewModel { 
-                Posts = _context.Posts.Where(x => x.Id == id)
-                .ToList(),
+                
 
                 Comments = _context.Comments
                 .Where(x => x.PostId == id)
                 .OrderBy(x=> x.PostedOn).ToList()
             };
 
-            if (viewModel.Posts == null)
+            if (viewModel.Post == null)
                 return HttpNotFound();
 
             return View(viewModel);

@@ -1,0 +1,25 @@
+﻿@model Mikro.ViewModels.CommentFormViewModel
+@{
+    ViewBag.Title = "_DisplayingCommentsPartial";
+}
+
+@foreach (var comment in Model.Comments)
+{
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            @comment.PostedOn.ToString("MMM d yyyy") | Added by <b>@comment.UserName</b>
+            @if (comment.UserId == @ViewBag.actualUserId)
+            {
+                <a href="@Url.Action("EditPost", "Mikro", new { id = comment.Id })">Edit Post</a>
+                <a href="@Url.Action("Delete", "Mikro", new { id = comment.Id})">Delete Post</a>
+                <a href="@Url.Action("PlusComment", "Mikro", new { id = comment.Id })">
+                    @comment.PlusCounter
+                </a>
+            }
+        </div>
+        <div class="panel-body">
+            @Html.Raw(comment.Content.Replace(Environment.NewLine, "<br/>"))
+        </div>
+    </div>
+}
+

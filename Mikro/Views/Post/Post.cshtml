@@ -1,0 +1,28 @@
+﻿@model Mikro.ViewModels.CommentFormViewModel
+@{
+    ViewBag.Title = "Post";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Post</h2>
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            @Model.Post.PostedOn.ToString("MMM d yyyy"), Added by <b> @Model.Post.Username </b>
+        </div>
+        <div class="panel-body">@Html.Raw(Model.Post.Content.Replace(Environment.NewLine, "<br/>"))</div>
+    </div>
+
+@Html.Partial("_DisplayingCommentsPartial")
+@if (User.Identity.IsAuthenticated)
+{
+    using (Html.BeginForm("Post", "Post"))
+    {
+        <div class="form-group">
+            @Html.TextAreaFor(m => m.Content, 5, 100, null)
+            <div>
+                <button type="submit" class="btn btn-primary">Wyslij</button>
+            </div>
+        </div>
+    }
+}

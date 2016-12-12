@@ -202,6 +202,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MikroController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -270,6 +271,10 @@
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\CommentPlus.cs" />
     <Compile Include="Models\PostPlus.cs" />
+    <Compile Include="Repository\GenericRepository.cs" />
+    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\PostRepository.cs" />
+    <Compile Include="Repository\UnitOfWork.cs" />
     <Compile Include="ViewModels\CommentFormViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -352,16 +357,17 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Mikro\Index.cshtml" />
-    <Content Include="Views\Mikro\_DisplayingPostsPartial.cshtml" />
-    <Content Include="Views\Mikro\Post.cshtml" />
-    <Content Include="Views\Mikro\_DisplayingCommentsPartial.cshtml" />
-    <Content Include="Views\Mikro\EditPost.cshtml" />
+    <Content Include="Views\Post\Index.cshtml" />
+    <Content Include="Views\Post\_DisplayingPostsPartial.cshtml" />
+    <Content Include="Views\Post\Post.cshtml" />
+    <Content Include="Views\Post\_DisplayingCommentsPartial.cshtml" />
+    <Content Include="Views\Post\EditPost.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\UnitOfWork\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
