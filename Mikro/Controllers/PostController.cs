@@ -137,5 +137,38 @@ namespace Mikro.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        [Authorize]
+        public ActionResult PlusPost(int id)
+        {
+            var userId = User.Identity.GetUserId();
+            var post = uow.Repository<Post>().Select(x => x.Id == id);
+
+            var postPlus = uow.Repository<PostPlus>().GetPlus(x => x.PostId == id, x => x.UserId == userId);
+
+            if (postPlus != null)
+            {
+                post.PlusCounter -= 1;
+                uow.Repository<PostPlus>().Delete(postPlus);
+                uow.SaveChanges();
+                return RedirectToAction("Index", "Post");
+            }
+
+            else
+            {
+                var plus = new PostPlus
+                {
+                    PostId = id,
+                    UserId = userId
+                };
+
+                post.PlusCounter += 1;
+                uow.Repository<PostPlus>().Add(postPlus);
+                uow.SaveChanges();
+            }
+
+            return RedirectToAction("Index", "Post");
+        }
+
     }
 }

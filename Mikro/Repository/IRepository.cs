@@ -10,9 +10,10 @@ namespace Mikro.Repository
     public interface IRepository<T> where T : class
     {
         IEnumerable<T> GetOverview(Func<T, bool> predicate = null);
-        T GetDetail(Func<T, bool> predicate);
+        T GetDetail(Expression<Func<T, bool>> predicate);
         T Select(Expression<Func<T, bool>> predicate);
         void Add(T entity);
         void Delete(T entity);
+        T GetPlus(Func<T, bool> predicate, Func<T, bool> predicate2);
     }
 }

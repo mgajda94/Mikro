@@ -32,6 +32,7 @@ namespace Mikro.Repository
         }
 
         private bool disposed = false;
+
         public virtual void Dispose(bool disposing)
         {
             if (!this.disposed)
@@ -44,7 +45,8 @@ namespace Mikro.Repository
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

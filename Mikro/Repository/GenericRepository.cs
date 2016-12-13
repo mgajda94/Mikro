@@ -35,7 +35,7 @@ namespace Mikro.Repository
             return _objectSet.FirstOrDefault(predicate);
         }
 
-        public T GetDetail(Func<T, bool> predicate)
+        public T GetDetail(Expression<Func<T, bool>> predicate)
         {
             return _objectSet.First(predicate);
         }
@@ -45,6 +45,11 @@ namespace Mikro.Repository
             if (predicate != null)
                 return _objectSet.Where(predicate);
             return _objectSet.AsEnumerable();
+        }
+
+        public T GetPlus(Func<T, bool> predicate, Func<T, bool> predicate2)
+        {
+            return _objectSet.Where(predicate).Where(predicate).FirstOrDefault();              
         }
     }
 }

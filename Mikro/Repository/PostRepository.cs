@@ -46,5 +46,15 @@ namespace Mikro.Repository
         {
             throw new NotImplementedException();
         }
+
+        public Post GetDetail(Expression<Func<Post, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Post GetPlus(Func<Post, bool> predicate, Func<Post, bool> predicate2)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
