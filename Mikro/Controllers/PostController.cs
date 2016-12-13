@@ -137,7 +137,6 @@ namespace Mikro.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
         [Authorize]
         public ActionResult PlusPost(int id)
         {
@@ -163,7 +162,7 @@ namespace Mikro.Controllers
                 };
 
                 post.PlusCounter += 1;
-                uow.Repository<PostPlus>().Add(postPlus);
+                uow.Repository<PostPlus>().Add(plus);
                 uow.SaveChanges();
             }
 
