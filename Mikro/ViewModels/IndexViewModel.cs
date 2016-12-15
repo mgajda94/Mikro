@@ -11,9 +11,8 @@ namespace Mikro.ViewModels
         [Required]
         [DataType(DataType.MultilineText)]
         public string Content { get; set; }
-
         public int CommentCounter { get; set; }
-
+        public IList<PostPlus> Plus { get; set; }
         public IList<Comment> Comments { get; set; }
         public IList<Post> Posts { get; set; }
     }

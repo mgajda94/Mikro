@@ -7,15 +7,32 @@
 {
     <div class="panel panel-info">
         <div class="panel-heading">
-            @comment.PostedOn.ToString("MMM d yyyy") | Added by <b>@comment.UserName</b>
-            @if (comment.UserId == @ViewBag.actualUserId)
-            {
-                <a href="@Url.Action("EditComment", "Comment", new { id = comment.Id })">Edit Post</a>
-                <a href="@Url.Action("Delete", "Comment", new { id = comment.Id})">Delete Post</a>
-            }
-            <a href="@Url.Action("PlusComment", "Comment", new { id = comment.Id })">
-                @comment.PlusCounter
-            </a>
+            <div class="panel-heading-one">
+                @comment.PostedOn.ToString("MMM d yyyy") | Added by <b>@comment.UserName</b>
+            </div>
+            <div class="panel-heading-two">               
+                @if (Model.Plus.FirstOrDefault(x=>x.CommentId == comment.Id) != null)
+                {
+                    <a class="plus-container" href="@Url.Action("PlusComment", "Comment", new { id = comment.Id })">
+                        <b>+@comment.PlusCounter</b>
+                    </a>
+                }
+                else
+                {
+                   <a href="@Url.Action("PlusComment", "Comment", new { id = comment.Id })">
+                       <b>@comment.PlusCounter</b> 
+                   </a>
+                }
+                @if (comment.UserId == @ViewBag.actualUserId)
+                {
+                    <a href="@Url.Action("EditComment", "Comment", new { id = comment.Id })">
+                        <span class="glyphicon glyphicon-edit"> </span>
+                    </a>
+                    <a href="@Url.Action("Delete", "Comment", new { id = comment.Id})">
+                        <span class="glyphicon glyphicon-remove" style="color:red"> </span>
+                    </a>
+                }               
+            </div>
         </div>
         <div class="panel-body">
             @Html.Raw(comment.Content.Replace(Environment.NewLine, "<br/>"))

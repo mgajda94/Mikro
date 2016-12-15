@@ -27,7 +27,7 @@ namespace Mikro.Controllers
             var viewModel = new PostFormViewModel
             {
                 Posts = _context.Posts.OrderByDescending(x => x.PostedOn).ToList(),
-                PostPlus = _context.PostPluses.ToList(),
+                Plus = _context.PostPluses.ToList(),
                 UserId = actualUserId
             };
 
@@ -168,7 +168,7 @@ namespace Mikro.Controllers
             post.PlusCounter += 1;
             _context.PostPluses.Add(plus);
             _context.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         [Authorize]

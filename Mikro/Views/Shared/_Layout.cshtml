@@ -17,22 +17,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Mikroblog", "Index", "Mikro", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Mikroblog", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Strona Glowna", "Index", "Mikro")</li>
+                    <li>@Html.ActionLink("Strona Glowna", "Index", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
     <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+        @RenderBody()   
     </div>
 
     @Scripts.Render("~/bundles/jquery")

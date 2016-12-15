@@ -79,22 +79,22 @@ namespace Mikro.Controllers
             post.Content = viewModel.Content;
             uow.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         [Route("/{id:int}")]
         public ActionResult Post(int id)
         {
             ViewBag.actualUserId = User.Identity.GetUserId();
-
+            var user = User.Identity.GetUserId();
             var viewModel = new CommentFormViewModel
             {
                 Post = uow.Repository<Post>().Select(x => x.Id == id),
-
                 Comments = uow.Repository<Comment>()
-                .GetOverview(x=>x.PostId == id)
-                .OrderBy(x=>x.PostedOn)
-                .ToList()
+                .GetOverview(x => x.PostId == id)
+                .OrderBy(x => x.PostedOn)
+                .ToList(),
+                Plus = uow.Repository<CommentPlus>().GetOverview(x => x.UserId == user).ToList()
             };
 
             if (viewModel.Post == null)
@@ -149,7 +149,7 @@ namespace Mikro.Controllers
                 post.PlusCounter -= 1;
                 uow.Repository<PostPlus>().Delete(postPlus);
                 uow.SaveChanges();
-                return RedirectToAction("Index", "Post");
+                return RedirectToAction("Index", "Home");
             }
 
             else
@@ -165,7 +165,7 @@ namespace Mikro.Controllers
                 uow.SaveChanges();
             }
 
-            return RedirectToAction("Index", "Post");
+            return RedirectToAction("Index", "Home");
         }
 
     }

@@ -87,3 +87,27 @@ textarea {
 .body-content {
     background-color: #333333;
 }
+
+
+.panel-heading-one{
+    display:inline-block;
+}
+
+.panel-heading-two{
+    float: right;   
+    display:inline-block;
+}
+
+a.plus-container{
+    background-color: green;
+    padding: 2px;
+    color: white;
+}
+
+.panel-heading a{
+    padding-left: 5px;
+}
+
+.panel-heading a:hover{
+    text-decoration:none;
+}

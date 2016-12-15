@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNet.Identity;
 using Mikro.Models;
 using Mikro.Repository;
+using Mikro.ViewModels;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -19,30 +21,40 @@ namespace Mikro.Controllers
         }
 
         public ActionResult Index()
-        {
+        {            
             ViewBag.actualUserId = User.Identity.GetUserId();
+            var user = User.Identity.GetUserId();
 
             var viewModel = new ViewModels.IndexViewModel
             {
                 Posts = uow.Repository<Post>().GetOverview().OrderByDescending(x => x.PostedOn).ToList(),
-                Comments = uow.Repository<Comment>().GetOverview().ToList()
+                Comments = uow.Repository<Comment>().GetOverview().ToList(),
+                Plus = uow.Repository<PostPlus>().GetOverview(x => x.UserId == user).ToList()
             };
 
             return View(viewModel);
         }
 
-        public ActionResult About()
+        [HttpPost]
+        public ActionResult Index(PostFormViewModel viewModel)
         {
-            ViewBag.Message = "Your application description page.";
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
 
-            return View();
-        }
+            var post = new Post
+            {
+                UserId = User.Identity.GetUserId(),
+                Username = User.Identity.GetUserName(),
+                PostedOn = DateTime.Now,
+                Content = viewModel.Content
+            };
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+            uow.Repository<Post>().Add(post);
+            uow.SaveChanges();
 
-            return View();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

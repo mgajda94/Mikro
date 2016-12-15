@@ -40,49 +40,48 @@ namespace Mikro.Controllers
             comment.Content = viewModel.Content;
             uow.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Post", "Post", new {id = comment.PostId });
         }
-
-        [HttpPost]
+      
         public ActionResult Delete(int id)
         {
             var comment = uow.Repository<Comment>().Select(x => x.Id == id);
             uow.Repository<Comment>().Delete(comment);
             uow.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Post", "Post", new { id = comment.PostId });
         }
 
         [Authorize]
-        public ActionResult PlusPost(int id)
+        public ActionResult PlusComment(int id)
         {
             var userId = User.Identity.GetUserId();
-            var comment = uow.Repository<Post>().Select(x => x.Id == id);
+            var comment = uow.Repository<Comment>().Select(x => x.Id == id);
 
-            var postPlus = uow.Repository<PostPlus>().GetPlus(x => x.PostId == id, x => x.UserId == userId);
+            var postPlus = uow.Repository<CommentPlus>().GetPlus(x => x.CommentId == id, x => x.UserId == userId);
 
             if (postPlus != null)
             {
                 comment.PlusCounter -= 1;
-                uow.Repository<PostPlus>().Delete(postPlus);
+                uow.Repository<CommentPlus>().Delete(postPlus);
                 uow.SaveChanges();
-                return RedirectToAction("Index", "Post");
+                return RedirectToAction("Post", "Post", new { id = comment.PostId });
             }
 
             else
             {
-                var plus = new PostPlus
+                var plus = new CommentPlus
                 {
-                    PostId = id,
+                    CommentId = id,
                     UserId = userId
                 };
 
                 comment.PlusCounter += 1;
-                uow.Repository<PostPlus>().Add(plus);
+                uow.Repository<CommentPlus>().Add(plus);
                 uow.SaveChanges();
             }
 
-            return RedirectToAction("Index", "Post");
+            return RedirectToAction("Post", "Post", new { id = comment.PostId });
         }
     }
 }
