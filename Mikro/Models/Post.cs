@@ -22,6 +22,7 @@ namespace Mikro.Models
 
         [DataType(DataType.MultilineText)]
         public string Content { get; set; }
+        
 
     }
 }

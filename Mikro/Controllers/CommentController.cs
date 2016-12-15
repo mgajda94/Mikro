@@ -2,10 +2,6 @@
 using Mikro.Models;
 using Mikro.Repository;
 using Mikro.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Mikro.Controllers
@@ -23,13 +19,12 @@ namespace Mikro.Controllers
         }
 
         [Route("Post/Edit/{id:int}")]
-        public ActionResult EditComment()
+        public ActionResult EditComment(int id)
         {
             var comment = uow.Repository<Comment>().Select(x => x.Id == id);
 
             if (comment == null | comment.UserId != User.Identity.GetUserId())
                 return HttpNotFound();
-
             return View(comment);
         }
 

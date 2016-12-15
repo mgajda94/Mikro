@@ -1,0 +1,24 @@
+﻿@model Mikro.ViewModels.IndexViewModel
+
+@foreach(var post in Model.Posts)
+{
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            @post.PostedOn.ToString("MMM d yyyy") | Added by <b>@post.Username</b>  
+            @if (post.UserId == @ViewBag.actualUserId)
+            {
+                  <a href="@Url.Action("EditPost", "Post", new { id = post.Id })">Edit Post</a>
+                  <a href="@Url.Action("Delete", "Post", new { id = post.Id})">Delete Post</a>                
+            }
+            <a href="@Url.Action("PlusPost", "Post", new { id = post.Id })">@post.PlusCounter</a>
+        </div>
+        <div class="panel-body">
+            @Html.Raw(post.Content.Replace(Environment.NewLine, "<br/>"))
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="@Url.Action("Post", "Post", new { id = post.Id})">Comments(@Model.Comments.Where(x=>x.PostId == post.Id).Count())</a>
+            </li>
+        </ul>
+    </div>
+}

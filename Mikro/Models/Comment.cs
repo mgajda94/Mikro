@@ -14,15 +14,18 @@ namespace Mikro.Models
         public string UserName { get; set; }
 
         [Required]
-        public int PostId { get; set; }
-
-        [Required]
         public DateTime PostedOn { get; set; }
 
         public int PlusCounter { get; set; }
 
         public DateTime? Modifed { get; set; }
+
         [Required]
+        [DataType(DataType.MultilineText)]
         public string Content { get; set; }
+
+        [Required]
+        public int PostId { get; set; }
+        
     }
 }

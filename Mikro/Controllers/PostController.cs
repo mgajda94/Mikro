@@ -3,9 +3,7 @@ using Mikro.Models;
 using Mikro.Repository;
 using Mikro.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Mikro.Controllers
@@ -58,7 +56,7 @@ namespace Mikro.Controllers
             return RedirectToAction("Index", "Post");
         }
 
-        [Route("Post/Edit/{id:int}")]
+        [Route("/Edit/{id:int}")]
         public ActionResult EditPost(int id, PostFormViewModel viewModel)
         {
             var post = uow.Repository<Post>().Select(x=>x.Id == id);
@@ -84,7 +82,7 @@ namespace Mikro.Controllers
             return RedirectToAction("Index");
         }
 
-        [Route("Post/{id:int}")]
+        [Route("/{id:int}")]
         public ActionResult Post(int id)
         {
             ViewBag.actualUserId = User.Identity.GetUserId();
@@ -92,6 +90,7 @@ namespace Mikro.Controllers
             var viewModel = new CommentFormViewModel
             {
                 Post = uow.Repository<Post>().Select(x => x.Id == id),
+
                 Comments = uow.Repository<Comment>()
                 .GetOverview(x=>x.PostId == id)
                 .OrderBy(x=>x.PostedOn)
