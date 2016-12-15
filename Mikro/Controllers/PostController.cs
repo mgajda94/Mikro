@@ -126,14 +126,13 @@ namespace Mikro.Controllers
             return RedirectToAction("Post", "Post");
         }
 
-        [HttpPost]
         public ActionResult Delete(int id)
         {
             var post = uow.Repository<Post>().Select(x => x.Id == id);
             uow.Repository<Post>().Delete(post);
             uow.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         [Authorize]

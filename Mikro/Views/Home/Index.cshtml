@@ -5,7 +5,7 @@
 <h2>Nowe Wpisy</h2>
 @if (User.Identity.IsAuthenticated)
 {
-    using (Html.BeginForm("Index", "Post"))
+    using (Html.BeginForm("Index", "Home"))
     {
         <div class="form-group">
             @Html.TextAreaFor(m => m.Content, 5, 900, new { @placeholder = "Enter text here" })
