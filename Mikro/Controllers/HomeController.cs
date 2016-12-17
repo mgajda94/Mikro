@@ -5,6 +5,8 @@ using Mikro.ViewModels;
 using System;
 using System.Linq;
 using System.Web.Mvc;
+using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace Mikro.Controllers
 {
@@ -43,13 +45,42 @@ namespace Mikro.Controllers
                 return View();
             }
 
+            var output = viewModel.Content;
+            string href = "";
+            string name = "";
+
+            IEnumerable<string> tags = Regex.Split(viewModel.Content, @"\s+").Where(i => i.StartsWith("#"));
+            
+            foreach (var item in tags)
+            {
+                name = item.Replace("#", "");
+                href = Url.Action("Tags","Tag", new { tagId = name });
+                output = viewModel.Content
+                    .Replace(item, "<a href='" + href + "'>" + item + "</a>");             
+            }
+
             var post = new Post
             {
                 UserId = User.Identity.GetUserId(),
                 Username = User.Identity.GetUserName(),
                 PostedOn = DateTime.Now,
-                Content = viewModel.Content
+                Content = output
             };
+            
+            foreach (var item in tags)
+            {
+                name = item.Replace("#", "");
+
+                if (uow.Repository<Tag>().Select(x => x.Name == item) == null)
+                {
+                    var tag = new Tag
+                    {
+                        Name = name,
+                    };
+                    tag.PostsId.Add(post.Id);
+                    uow.Repository<Tag>().Add(tag);
+                }
+            }
 
             uow.Repository<Post>().Add(post);
             uow.SaveChanges();

@@ -1,0 +1,42 @@
+﻿@model Mikro.ViewModels.TagViewModel
+@foreach (var post in Model.Posts)
+{
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            @post.PostedOn.ToString("MMM d yyyy") | Added by <b>@post.Username</b>
+            <div class="panel-heading-two">
+                @if (Model.Plus.FirstOrDefault(x => x.PostId == post.Id) != null)
+                {
+                    <a class="plus-container" href="@Url.Action("PlusPost", "Post", new { id = post.Id })">
+                        <b>+@post.PlusCounter</b>
+                    </a>
+                }
+                else
+                {
+                    <a href="@Url.Action("PlusPost", "Post", new { id = post.Id })">
+                        <b>@post.PlusCounter</b>
+                    </a>
+                }
+                @if (post.UserId == @ViewBag.actualUserId)
+                {
+                    <a href="@Url.Action("EditPost", "Post", new { id = post.Id })">
+                        <span class="glyphicon glyphicon-edit"> </span>
+                    </a>
+                    <a href="@Url.Action("Delete", "Post", new { id = post.Id})">
+                        <span class="glyphicon glyphicon-remove" style="color:red"> </span>
+                    </a>
+                }
+            </div>
+        </div>
+        <div class="panel-body">
+            @Html.Raw(post.Content.Replace(Environment.NewLine, "<br/>"))
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="@Url.Action("Post", "Post", new { id = post.Id})">
+                    Comments(@Model.Comments.Where(x => x.PostId == post.Id).Count())
+                </a>
+            </li>
+        </ul>
+    </div>
+}

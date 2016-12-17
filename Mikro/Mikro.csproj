@@ -204,6 +204,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MikroController.cs" />
     <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -267,11 +268,24 @@
     <Compile Include="Migrations\201612101829375_AddPlusCounterToPlusCommentModel.Designer.cs">
       <DependentUpon>201612101829375_AddPlusCounterToPlusCommentModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612162202471_AddTagModel.cs" />
+    <Compile Include="Migrations\201612162202471_AddTagModel.Designer.cs">
+      <DependentUpon>201612162202471_AddTagModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612162226395_UpdateTagModel.cs" />
+    <Compile Include="Migrations\201612162226395_UpdateTagModel.Designer.cs">
+      <DependentUpon>201612162226395_UpdateTagModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612162248267_SecondUpdateTagModel.cs" />
+    <Compile Include="Migrations\201612162248267_SecondUpdateTagModel.Designer.cs">
+      <DependentUpon>201612162248267_SecondUpdateTagModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\CommentPlus.cs" />
     <Compile Include="Models\PostPlus.cs" />
+    <Compile Include="Models\Tag.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\PostRepository.cs" />
@@ -284,6 +298,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\IndexViewModel.cs" />
     <Compile Include="ViewModels\PostFormViewModel.cs" />
+    <Compile Include="ViewModels\TagViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -367,6 +382,8 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Comment\EditComment.cshtml" />
+    <Content Include="Views\Tag\Tags.cshtml" />
+    <Content Include="Views\Tag\_DisplayingPostPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -421,6 +438,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612101829375_AddPlusCounterToPlusCommentModel.resx">
       <DependentUpon>201612101829375_AddPlusCounterToPlusCommentModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612162202471_AddTagModel.resx">
+      <DependentUpon>201612162202471_AddTagModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612162226395_UpdateTagModel.resx">
+      <DependentUpon>201612162226395_UpdateTagModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612162248267_SecondUpdateTagModel.resx">
+      <DependentUpon>201612162248267_SecondUpdateTagModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -24,6 +24,7 @@ namespace Mikro.Models
         public DbSet<Comment> Comments { get; set; }
         public DbSet<PostPlus> PostPluses { get; set; }
         public DbSet<CommentPlus> CommentPluses { get; set; }
+        public DbSet<Tag> Tags { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

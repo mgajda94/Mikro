@@ -10,6 +10,16 @@ namespace Mikro
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+        public static void RegisterRoute(RouteCollection routes)
+        {
+            routes.MapRoute(
+                "Tags",
+                "{tagId}",
+                new { Controller = "Tag", Action = "Tags" },
+                new { tagId = UrlParameter.Optional });
+            
+        }
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
