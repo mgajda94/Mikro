@@ -208,83 +208,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611261306159_CreateModels.cs" />
-    <Compile Include="Migrations\201611261306159_CreateModels.Designer.cs">
-      <DependentUpon>201611261306159_CreateModels.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611261445337_UpdateAccountSystem.cs" />
-    <Compile Include="Migrations\201611261445337_UpdateAccountSystem.Designer.cs">
-      <DependentUpon>201611261445337_UpdateAccountSystem.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611261522476_AddViewModel.cs" />
-    <Compile Include="Migrations\201611261522476_AddViewModel.Designer.cs">
-      <DependentUpon>201611261522476_AddViewModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611262247299_UpdateViewModel.cs" />
-    <Compile Include="Migrations\201611262247299_UpdateViewModel.Designer.cs">
-      <DependentUpon>201611262247299_UpdateViewModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611270027195_UpdateViewModel1.cs" />
-    <Compile Include="Migrations\201611270027195_UpdateViewModel1.Designer.cs">
-      <DependentUpon>201611270027195_UpdateViewModel1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611281922251_AddedUsernameToPostModel.cs" />
-    <Compile Include="Migrations\201611281922251_AddedUsernameToPostModel.Designer.cs">
-      <DependentUpon>201611281922251_AddedUsernameToPostModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611300943322_EditCommentModel.cs" />
-    <Compile Include="Migrations\201611300943322_EditCommentModel.Designer.cs">
-      <DependentUpon>201611300943322_EditCommentModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611301447348_UpdatePostMethod.cs" />
-    <Compile Include="Migrations\201611301447348_UpdatePostMethod.Designer.cs">
-      <DependentUpon>201611301447348_UpdatePostMethod.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612052136073_EditPostModel.cs" />
-    <Compile Include="Migrations\201612052136073_EditPostModel.Designer.cs">
-      <DependentUpon>201612052136073_EditPostModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612052210390_EditPostModel1.cs" />
-    <Compile Include="Migrations\201612052210390_EditPostModel1.Designer.cs">
-      <DependentUpon>201612052210390_EditPostModel1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612092136154_AddPostPlusAndCommentPlusModels.cs" />
-    <Compile Include="Migrations\201612092136154_AddPostPlusAndCommentPlusModels.Designer.cs">
-      <DependentUpon>201612092136154_AddPostPlusAndCommentPlusModels.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612092140462_AddPostPlusAndCommentPlusModels2.cs" />
-    <Compile Include="Migrations\201612092140462_AddPostPlusAndCommentPlusModels2.Designer.cs">
-      <DependentUpon>201612092140462_AddPostPlusAndCommentPlusModels2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612101659410_AddingPlusCounterToPostsModel.cs" />
-    <Compile Include="Migrations\201612101659410_AddingPlusCounterToPostsModel.Designer.cs">
-      <DependentUpon>201612101659410_AddingPlusCounterToPostsModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612101801114_AddingForeignKeyToCommentPlusandPostPlus.cs" />
-    <Compile Include="Migrations\201612101801114_AddingForeignKeyToCommentPlusandPostPlus.Designer.cs">
-      <DependentUpon>201612101801114_AddingForeignKeyToCommentPlusandPostPlus.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612101829375_AddPlusCounterToPlusCommentModel.cs" />
-    <Compile Include="Migrations\201612101829375_AddPlusCounterToPlusCommentModel.Designer.cs">
-      <DependentUpon>201612101829375_AddPlusCounterToPlusCommentModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612162202471_AddTagModel.cs" />
-    <Compile Include="Migrations\201612162202471_AddTagModel.Designer.cs">
-      <DependentUpon>201612162202471_AddTagModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612162226395_UpdateTagModel.cs" />
-    <Compile Include="Migrations\201612162226395_UpdateTagModel.Designer.cs">
-      <DependentUpon>201612162226395_UpdateTagModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612162248267_SecondUpdateTagModel.cs" />
-    <Compile Include="Migrations\201612162248267_SecondUpdateTagModel.Designer.cs">
-      <DependentUpon>201612162248267_SecondUpdateTagModel.cs</DependentUpon>
+    <Compile Include="Migrations\201612172209465_AddFirstMigration.cs" />
+    <Compile Include="Migrations\201612172209465_AddFirstMigration.Designer.cs">
+      <DependentUpon>201612172209465_AddFirstMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\CommentPlus.cs" />
     <Compile Include="Models\PostPlus.cs" />
+    <Compile Include="Models\PostTag.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
@@ -382,8 +315,8 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Comment\EditComment.cshtml" />
-    <Content Include="Views\Tag\Tags.cshtml" />
-    <Content Include="Views\Tag\_DisplayingPostPartial.cshtml" />
+    <Content Include="Views\Tag\DisplayTagContent.cshtml" />
+    <Content Include="Views\Tag\_DisplayingPostsInTagsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -394,59 +327,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201611261306159_CreateModels.resx">
-      <DependentUpon>201611261306159_CreateModels.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611261445337_UpdateAccountSystem.resx">
-      <DependentUpon>201611261445337_UpdateAccountSystem.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611261522476_AddViewModel.resx">
-      <DependentUpon>201611261522476_AddViewModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611262247299_UpdateViewModel.resx">
-      <DependentUpon>201611262247299_UpdateViewModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611270027195_UpdateViewModel1.resx">
-      <DependentUpon>201611270027195_UpdateViewModel1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611281922251_AddedUsernameToPostModel.resx">
-      <DependentUpon>201611281922251_AddedUsernameToPostModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611300943322_EditCommentModel.resx">
-      <DependentUpon>201611300943322_EditCommentModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611301447348_UpdatePostMethod.resx">
-      <DependentUpon>201611301447348_UpdatePostMethod.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612052136073_EditPostModel.resx">
-      <DependentUpon>201612052136073_EditPostModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612052210390_EditPostModel1.resx">
-      <DependentUpon>201612052210390_EditPostModel1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612092136154_AddPostPlusAndCommentPlusModels.resx">
-      <DependentUpon>201612092136154_AddPostPlusAndCommentPlusModels.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612092140462_AddPostPlusAndCommentPlusModels2.resx">
-      <DependentUpon>201612092140462_AddPostPlusAndCommentPlusModels2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612101659410_AddingPlusCounterToPostsModel.resx">
-      <DependentUpon>201612101659410_AddingPlusCounterToPostsModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612101801114_AddingForeignKeyToCommentPlusandPostPlus.resx">
-      <DependentUpon>201612101801114_AddingForeignKeyToCommentPlusandPostPlus.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612101829375_AddPlusCounterToPlusCommentModel.resx">
-      <DependentUpon>201612101829375_AddPlusCounterToPlusCommentModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612162202471_AddTagModel.resx">
-      <DependentUpon>201612162202471_AddTagModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612162226395_UpdateTagModel.resx">
-      <DependentUpon>201612162226395_UpdateTagModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612162248267_SecondUpdateTagModel.resx">
-      <DependentUpon>201612162248267_SecondUpdateTagModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612172209465_AddFirstMigration.resx">
+      <DependentUpon>201612172209465_AddFirstMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

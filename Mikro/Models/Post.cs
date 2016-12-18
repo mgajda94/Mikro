@@ -22,7 +22,9 @@ namespace Mikro.Models
 
         [DataType(DataType.MultilineText)]
         public string Content { get; set; }
-        
+
+        public virtual ICollection<Comment> Comments { get; set; }
+
 
     }
 }

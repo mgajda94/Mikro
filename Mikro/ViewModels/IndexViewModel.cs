@@ -14,6 +14,12 @@ namespace Mikro.ViewModels
         public int CommentCounter { get; set; }
         public IList<PostPlus> Plus { get; set; }
         public IList<Comment> Comments { get; set; }
-        public IList<Post> Posts { get; set; }
+        public ICollection<Post> Posts { get; set; }
+        public Tag Tag { get; set; }
+
+        public IndexViewModel()
+        {
+            this.Posts = new List<Post>();
+        }
     }
 }

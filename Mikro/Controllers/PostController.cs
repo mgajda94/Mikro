@@ -111,15 +111,19 @@ namespace Mikro.Controllers
                 return View();
             }
 
+            var post = uow.Repository<Post>().Select(x => x.Id == id);
+
             var comment = new Comment
             {
                 UserId = User.Identity.GetUserId(),
                 PostId = id,
                 UserName = User.Identity.GetUserName(),
                 PostedOn = DateTime.Now,
-                Content = viewModel.Content
+                Content = viewModel.Content,
+                Post = post
             };
 
+            post.Comments.Add(comment);
             uow.Repository<Comment>().Add(comment);
             uow.SaveChanges();
 

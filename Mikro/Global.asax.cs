@@ -15,7 +15,7 @@ namespace Mikro
             routes.MapRoute(
                 "Tags",
                 "{tagId}",
-                new { Controller = "Tag", Action = "Tags" },
+                new { Controller = "Tag", Action = "DisplayTagContent" },
                 new { tagId = UrlParameter.Optional });
             
         }

@@ -9,11 +9,11 @@ namespace Mikro.Models
     {       
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<int> PostsId { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
 
         public Tag()
         {
-            this.PostsId = new List<int>();
+            this.Posts = new List<Post>();
         }
     }
 }

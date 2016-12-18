@@ -54,7 +54,7 @@ namespace Mikro.Controllers
             foreach (var item in tags)
             {
                 name = item.Replace("#", "");
-                href = Url.Action("Tags","Tag", new { tagId = name });
+                href = Url.Action("DisplayTagContent", "Tag", new { tagId = name });
                 output = viewModel.Content
                     .Replace(item, "<a href='" + href + "'>" + item + "</a>");             
             }
@@ -71,15 +71,36 @@ namespace Mikro.Controllers
             {
                 name = item.Replace("#", "");
 
-                if (uow.Repository<Tag>().Select(x => x.Name == item) == null)
+                var existingTag = uow.Repository<Tag>().Select(x => x.Name == item);
+
+                if (existingTag == null)
                 {
                     var tag = new Tag
                     {
                         Name = name,
                     };
-                    tag.PostsId.Add(post.Id);
+                    tag.Posts.Add(post);
                     uow.Repository<Tag>().Add(tag);
+
+                    var postTag = new PostTag
+                    {
+                        PostId = post.Id,
+                        TagId = tag.Id
+                    };
+                    uow.Repository<Tag>().Add(tag);
+                    uow.Repository<PostTag>().Add(postTag);
                 }
+                else
+                {
+                    existingTag.Posts.Add(post);
+                    var postTag = new PostTag
+                    {
+                        PostId = post.Id,
+                        TagId = existingTag.Id
+                    };
+                    uow.Repository<PostTag>().Add(postTag);
+                }
+                
             }
 
             uow.Repository<Post>().Add(post);

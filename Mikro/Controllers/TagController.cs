@@ -24,15 +24,27 @@ namespace Mikro.Controllers
 
         public ActionResult DisplayTagContent(string tagId)
         {
-            ViewBag.actualUserId = User.Identity.GetUserId();
+            var userId = User.Identity.GetUserId();
+            ViewBag.actualUserId = userId;
             ViewBag.TagName = tagId;
 
-            var viewModel = new ViewModels.IndexViewModel();
-            var tag = uow.Repository<Tag>().Select(x => x.Name == tagId);
-            foreach (var item in tag.PostsId)
+            var viewModel = new ViewModels.IndexViewModel()
             {
-                viewModel.Posts = uow.Repository<Post>().GetOverview(x => x.Id == item).ToList(); ;
+                Comments = uow.Repository<Comment>().GetOverview().ToList(),
+                Plus = uow.Repository<PostPlus>().GetOverview(x => x.UserId == userId).ToList(),
+                Posts = new List<Post>(),
+                Tag = uow.Repository<Tag>().Select(x => x.Name == tagId)
+            };
+
+            var postTag = uow.Repository<PostTag>().GetOverview(x => x.TagId == viewModel.Tag.Id).ToList();
+
+            foreach (var post in postTag)
+            {
+                viewModel.Posts = uow.Repository<Post>().GetOverview(x => x.Id == post.PostId).ToList();
             }
+
+            if (postTag == null)
+                return View();
 
             return View(viewModel);
         }

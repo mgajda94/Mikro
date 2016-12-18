@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mikro.Models
 {
@@ -24,8 +25,11 @@ namespace Mikro.Models
         [DataType(DataType.MultilineText)]
         public string Content { get; set; }
 
+        [Key]
         [Required]
         public int PostId { get; set; }
-        
+
+        public virtual Post Post { get; set; }
+
     }
 }
