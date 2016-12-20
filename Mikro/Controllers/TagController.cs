@@ -10,9 +10,10 @@ using System.Web.Mvc;
 
 namespace Mikro.Controllers
 {
+    [RoutePrefix("Tag")]
     public class TagController : Controller
     {
-        private UnitOfWork uow = null;
+        private UnitOfWork uow ;
         public TagController()
         {
             uow = new UnitOfWork();
@@ -22,29 +23,32 @@ namespace Mikro.Controllers
             this.uow = _uow;
         }
 
-        public ActionResult DisplayTagContent(string tagId)
+        [Route("/{tagId:string}")]
+        public ActionResult DisplayTagContent(string id)
         {
             var userId = User.Identity.GetUserId();
             ViewBag.actualUserId = userId;
-            ViewBag.TagName = tagId;
+            ViewBag.TagName = id;
 
-            var viewModel = new ViewModels.IndexViewModel()
+            var viewModel = new ViewModels.HomeViewModel()
             {
                 Comments = uow.Repository<Comment>().GetOverview().ToList(),
                 Plus = uow.Repository<PostPlus>().GetOverview(x => x.UserId == userId).ToList(),
                 Posts = new List<Post>(),
-                Tag = uow.Repository<Tag>().Select(x => x.Name == tagId)
+                Tag = uow.Repository<Tag>().Select(x => x.Name == id)
             };
 
-            var postTag = uow.Repository<PostTag>().GetOverview(x => x.TagId == viewModel.Tag.Id).ToList();
+            var postTag = uow.Repository<PostTag>().GetOverview(x => x.Tag == viewModel.Tag).ToList();
+            ViewBag.Kant = postTag.Count();
+
 
             foreach (var post in postTag)
             {
-                viewModel.Posts = uow.Repository<Post>().GetOverview(x => x.Id == post.PostId).ToList();
+                var eachPost = uow.Repository<Post>().Select(x => x.Id == post.PostId);
+                viewModel.Posts.Add(eachPost);
             }
 
-            if (postTag == null)
-                return View();
+            viewModel.Posts.GroupBy(x => x.PostedOn);
 
             return View(viewModel);
         }

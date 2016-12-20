@@ -13,13 +13,17 @@ namespace Mikro.ViewModels
         [DataType(DataType.MultilineText)]
         public string Content { get; set; }
 
+        [Required]
+        [DataType(DataType.MultilineText)]
+        public string PostedContent { get; set; }
+
         public string UserId { get; set; }
 
         public DateTime PostedOn { get; set; }
 
         public IList<PostPlus> Plus { get; set; }
 
-        public IList<Comment> Comment { get; set; }
+        public IList<Comment> Comments { get; set; }
 
         public IList<Post> Posts { get; set; }
     }

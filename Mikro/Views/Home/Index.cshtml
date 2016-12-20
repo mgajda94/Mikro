@@ -1,4 +1,4 @@
-﻿@model Mikro.ViewModels.IndexViewModel
+﻿@model Mikro.ViewModels.HomeViewModel
 @{
     ViewBag.Title = "Index";
 }
@@ -15,4 +15,6 @@
         </div>
     }
 }
-@Html.Partial("_DisplayingPostsPartial")
+
+@Html.Partial("~/Views/Shared/_DisplayPostsPartial.cshtml")
+    

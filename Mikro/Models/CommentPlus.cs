@@ -10,12 +10,10 @@ namespace Mikro.Models
     public class CommentPlus
     {
         public int Id { get; set; }
-
-        [ForeignKey("Comment")]
+        public string UserId { get; set; }
         public int CommentId { get; set; }
 
         public virtual Comment Comment { get; set; }
 
-        public string UserId { get; set; }
     }
 }

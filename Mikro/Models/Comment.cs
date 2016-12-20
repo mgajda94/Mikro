@@ -6,10 +6,10 @@ namespace Mikro.Models
 {
     public class Comment
     {
+        [Key]
         public int Id { get; set; }
 
         public string UserId { get; set; }
-
         public ApplicationUser User { get; set; }
 
         public string UserName { get; set; }
@@ -25,10 +25,11 @@ namespace Mikro.Models
         [DataType(DataType.MultilineText)]
         public string Content { get; set; }
 
-        [Key]
+        [DataType(DataType.MultilineText)]
+        public string PostedContent { get; set; }
+        
         [Required]
         public int PostId { get; set; }
-
         public virtual Post Post { get; set; }
 
     }

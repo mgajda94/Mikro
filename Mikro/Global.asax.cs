@@ -5,27 +5,20 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using RouteDebug;
 
 namespace Mikro
 {
     public class MvcApplication : System.Web.HttpApplication
     {
-        public static void RegisterRoute(RouteCollection routes)
-        {
-            routes.MapRoute(
-                "Tags",
-                "{tagId}",
-                new { Controller = "Tag", Action = "DisplayTagContent" },
-                new { tagId = UrlParameter.Optional });
-            
-        }
-
+       
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            
         }
     }
 }

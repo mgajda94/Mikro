@@ -25,12 +25,27 @@ namespace Mikro.Models
         public DbSet<PostPlus> PostPluses { get; set; }
         public DbSet<CommentPlus> CommentPluses { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<PostTag> PostTag { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+        
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<PostTag>().HasKey(x => new { x.PostId, x.TagId });
+
+            modelBuilder.Entity<Tag>().HasMany(x => x.PostTag).WithRequired().HasForeignKey(x => x.TagId);
+            modelBuilder.Entity<Post>().HasMany(x => x.PostTag).WithRequired().HasForeignKey(x => x.PostId);
+
+            modelBuilder.Entity<Comment>()
+                .HasRequired<Post>(x => x.Post)
+                .WithMany(x => x.Comments);          
+        }
+        
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

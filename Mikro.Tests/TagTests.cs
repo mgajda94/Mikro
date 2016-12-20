@@ -3,6 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mikro.Models;
+using System.Linq;
 
 namespace Mikro.Tests
 {
@@ -62,21 +63,17 @@ namespace Mikro.Tests
         [TestMethod]
         public void TestMethod1()
         {
-            var post = new Post
+            List<Tag> Tags = new List<Tag>();
+            var tag1 = new Tag
             {
                 Id = 1,
-                Content = "content"
+                Name = "test"
             };
-            var tag = new Tag
-            {
-                Name = "konie"
-            };
-            tag.PostsId.Add(post.Id);
 
-            foreach (var id in tag.PostsId)
-            {
-                Assert.AreEqual(1, id);
-            }
+            Tags.Add(tag1);
+            var result = Tags.FirstOrDefault(x => x.Name == "test");
+            Console.Write(result.Name);
+            Assert.AreEqual(result, tag1);
         }
     }
 }

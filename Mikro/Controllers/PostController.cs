@@ -3,8 +3,11 @@ using Mikro.Models;
 using Mikro.Repository;
 using Mikro.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web.Mvc;
+using Mikro.Extension;
 
 namespace Mikro.Controllers
 {
@@ -57,7 +60,7 @@ namespace Mikro.Controllers
         }
 
         [Route("/Edit/{id:int}")]
-        public ActionResult EditPost(int id, PostFormViewModel viewModel)
+        public ActionResult EditPost(int id)
         {
             var post = uow.Repository<Post>().Select(x=>x.Id == id);
 
@@ -68,15 +71,21 @@ namespace Mikro.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditPost(PostFormViewModel viewModel)
+        public ActionResult EditPost(Post post)
         {
             if (!ModelState.IsValid)
             {
                 return View();
             }
 
-            var post = uow.Repository<Post>().Select(x=>x.Id == viewModel.Id);
-            post.Content = viewModel.Content;
+            var dbPost = uow.Repository<Post>().Select(x=>x.Id == post.Id);
+            var tagFunction = new TagFunction();
+            
+            IEnumerable<string> tags = Regex.Split(post.Content, @"\s+").Where(i => i.StartsWith("#"));
+            var output = tagFunction.TagToUrl(post.Content, tags);
+
+            dbPost.Content = post.Content;
+            dbPost.PostedContent = output;
             uow.SaveChanges();
 
             return RedirectToAction("Index", "Home");
@@ -108,10 +117,24 @@ namespace Mikro.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                return RedirectToAction("Post", "Post");
             }
 
             var post = uow.Repository<Post>().Select(x => x.Id == id);
+
+            var output = viewModel.Content;
+            string href = "";
+            string name = "";
+
+            IEnumerable<string> tags = Regex.Split(viewModel.Content, @"\s+").Where(i => i.StartsWith("#"));
+
+            foreach (var item in tags)
+            {
+                name = item.Replace("#", "");
+                href = Url.Action("DisplayTagContent", "Tag", new { tagId = name });
+                output = viewModel.Content
+                    .Replace(item, "<a href='" + href + "'>" + item + "</a>");
+            }
 
             var comment = new Comment
             {
@@ -119,11 +142,11 @@ namespace Mikro.Controllers
                 PostId = id,
                 UserName = User.Identity.GetUserName(),
                 PostedOn = DateTime.Now,
+                PostedContent = output,
                 Content = viewModel.Content,
                 Post = post
             };
 
-            post.Comments.Add(comment);
             uow.Repository<Comment>().Add(comment);
             uow.SaveChanges();
 
@@ -153,21 +176,15 @@ namespace Mikro.Controllers
                 uow.Repository<PostPlus>().Delete(postPlus);
                 uow.SaveChanges();
                 return RedirectToAction("Index", "Home");
-            }
-
-            else
+            }            
+            var plus = new PostPlus
             {
-                var plus = new PostPlus
-                {
-                    PostId = id,
-                    UserId = userId
-                };
-
-                post.PlusCounter += 1;
-                uow.Repository<PostPlus>().Add(plus);
-                uow.SaveChanges();
-            }
-
+                PostId = id,
+                UserId = userId
+            };
+            post.PlusCounter += 1;
+            uow.Repository<PostPlus>().Add(plus);
+            uow.SaveChanges();          
             return RedirectToAction("Index", "Home");
         }
 

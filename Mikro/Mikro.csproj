@@ -48,6 +48,10 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.5, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -83,6 +87,10 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RouteDebugger, Version=2.1.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\routedebugger.2.1.5\lib\net40\RouteDebugger.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -205,12 +213,13 @@
     <Compile Include="Controllers\MikroController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\TagController.cs" />
+    <Compile Include="Extension\TagFunction.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612172209465_AddFirstMigration.cs" />
-    <Compile Include="Migrations\201612172209465_AddFirstMigration.Designer.cs">
-      <DependentUpon>201612172209465_AddFirstMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201612192323303_FirstMigration.cs" />
+    <Compile Include="Migrations\201612192323303_FirstMigration.Designer.cs">
+      <DependentUpon>201612192323303_FirstMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -229,11 +238,15 @@
     <Compile Include="Models\Post.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\IndexViewModel.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\PostFormViewModel.cs" />
     <Compile Include="ViewModels\TagViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-Mikro-20161126013923.mdf" />
+    <Content Include="App_Data\aspnet-Mikro-20161126013923_log.ldf">
+      <DependentUpon>aspnet-Mikro-20161126013923.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -273,7 +286,9 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -307,8 +322,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Post\Index.cshtml" />
-    <Content Include="Views\Home\_DisplayingPostsPartial.cshtml" />
     <Content Include="Views\Post\Post.cshtml" />
     <Content Include="Views\Post\_DisplayingCommentsPartial.cshtml" />
     <Content Include="Views\Post\EditPost.cshtml" />
@@ -316,10 +329,10 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Comment\EditComment.cshtml" />
     <Content Include="Views\Tag\DisplayTagContent.cshtml" />
-    <Content Include="Views\Tag\_DisplayingPostsInTagsPartial.cshtml" />
+    <Content Include="Views\Shared\_DisplayPostsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="Views\ControllerExtensions\" />
     <Folder Include="Views\UnitOfWork\" />
   </ItemGroup>
   <ItemGroup>
@@ -327,8 +340,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612172209465_AddFirstMigration.resx">
-      <DependentUpon>201612172209465_AddFirstMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612192323303_FirstMigration.resx">
+      <DependentUpon>201612192323303_FirstMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

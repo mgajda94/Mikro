@@ -19,9 +19,9 @@
                 }
                 else
                 {
-                   <a href="@Url.Action("PlusComment", "Comment", new { id = comment.Id })">
-                       <b>@comment.PlusCounter</b> 
-                   </a>
+                    <a href="@Url.Action("PlusComment", "Comment", new { id = comment.Id })">
+                        <b>@comment.PlusCounter</b> 
+                    </a>
                 }
                 @if (comment.UserId == @ViewBag.actualUserId)
                 {
@@ -35,8 +35,9 @@
             </div>
         </div>
         <div class="panel-body">
-            @Html.Raw(comment.Content.Replace(Environment.NewLine, "<br/>"))
+            @Html.Raw(comment.PostedContent.Replace(Environment.NewLine, "<br/>"))
         </div>
     </div>
+    
 }
 
