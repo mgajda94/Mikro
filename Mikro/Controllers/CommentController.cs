@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using Microsoft.AspNet.Identity;
 using Mikro.Models;
 using Mikro.Repository;
 using Mikro.ViewModels;
 using System.Web.Mvc;
+using Mikro.Extension;
 
 namespace Mikro.Controllers
 {
@@ -29,18 +33,23 @@ namespace Mikro.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditComment(PostFormViewModel viewModel)
+        public ActionResult EditComment(Comment comment)
         {
             if (!ModelState.IsValid)
             {
                 return View();
             }
+            var tagFunction = new TagFunction();
 
-            var comment = uow.Repository<Comment>().Select(x => x.Id == viewModel.Id);
-            comment.Content = viewModel.Content;
+            IEnumerable<string> tags = Regex.Split(comment.Content, @"\s+").Where(i => i.StartsWith("#"));
+            var output = tagFunction.TagToUrl(comment.Content, tags);
+
+            var dbComment = uow.Repository<Comment>().Select(x => x.Id == comment.Id);
+            dbComment.Content = comment.Content;
+            dbComment.PostedContent = output;
             uow.SaveChanges();
 
-            return RedirectToAction("Post", "Post", new {id = comment.PostId });
+            return RedirectToAction("Post", "Post", new {id = dbComment.PostId });
         }
       
         public ActionResult Delete(int id)

@@ -210,7 +210,6 @@
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\MikroController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Extension\TagFunction.cs" />

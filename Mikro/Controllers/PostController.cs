@@ -121,21 +121,11 @@ namespace Mikro.Controllers
             }
 
             var post = uow.Repository<Post>().Select(x => x.Id == id);
-
-            var output = viewModel.Content;
-            string href = "";
-            string name = "";
-
+            var tagFunction = new TagFunction();
+            
             IEnumerable<string> tags = Regex.Split(viewModel.Content, @"\s+").Where(i => i.StartsWith("#"));
-
-            foreach (var item in tags)
-            {
-                name = item.Replace("#", "");
-                href = Url.Action("DisplayTagContent", "Tag", new { tagId = name });
-                output = viewModel.Content
-                    .Replace(item, "<a href='" + href + "'>" + item + "</a>");
-            }
-
+            
+            var output = tagFunction.TagToUrl(viewModel.Content, tags);
             var comment = new Comment
             {
                 UserId = User.Identity.GetUserId(),
