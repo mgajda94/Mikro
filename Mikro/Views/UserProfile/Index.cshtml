@@ -1,0 +1,8 @@
+﻿@model Mikro.ViewModels.HomeViewModel
+@{
+    ViewBag.Title = "User Profile";
+}
+<h2>@ViewBag.Username added @Model.Posts.Count() posts.</h2>
+
+
+@Html.Partial("~/Views/Shared/_DisplayPostsPartial.cshtml")

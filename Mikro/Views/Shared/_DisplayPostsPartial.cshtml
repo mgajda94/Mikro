@@ -4,7 +4,10 @@
 {
     <div class="panel panel-info">
         <div class="panel-heading">
-            @post.PostedOn.ToString("MMM d yyyy") | Added by <b>@post.Username</b>
+            @post.PostedOn.ToString("MMM d yyyy")
+            | Added by<b><a style="color: grey" href="
+                             @Url.RouteUrl("UserProfile", new {id = @post.Username})">@post.Username
+                      </a></b>
             <div class="panel-heading-two">
                 @if (Model.Plus.FirstOrDefault(x => x.PostId == post.Id) != null)
                 {

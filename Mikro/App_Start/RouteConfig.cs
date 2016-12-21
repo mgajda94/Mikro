@@ -14,6 +14,12 @@ namespace Mikro
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+               "UserProfile",
+               "user/{id}",
+               new { controller = "UserProfile", action = "Index", id = UrlParameter.Optional }
+               );
+
+            routes.MapRoute(
                 "EditPost",
                 "editpost/{id}",
                 new { controller = "Post", action = "Post", id = UrlParameter.Optional }

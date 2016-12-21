@@ -212,6 +212,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\TagController.cs" />
+    <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Extension\TagFunction.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -229,7 +230,6 @@
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
-    <Compile Include="Repository\PostRepository.cs" />
     <Compile Include="Repository\UnitOfWork.cs" />
     <Compile Include="ViewModels\CommentFormViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -327,6 +327,7 @@
     <Content Include="Views\Comment\EditComment.cshtml" />
     <Content Include="Views\Tag\DisplayTagContent.cshtml" />
     <Content Include="Views\Shared\_DisplayPostsPartial.cshtml" />
+    <Content Include="Views\UserProfile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\ControllerExtensions\" />
