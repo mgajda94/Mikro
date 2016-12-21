@@ -20,7 +20,7 @@
                 }
                 @if (post.UserId == @ViewBag.actualUserId)
                 {
-                    <a href="@Url.Action("EditPost", "Post", new { id = post.Id })">
+                    <a href="@Url.RouteUrl("EditPost", new { id = post.Id })">
                         <span class="glyphicon glyphicon-edit"> </span>
                     </a>
                     <a href="@Url.Action("Delete", "Post", new { id = post.Id})">
@@ -34,7 +34,7 @@
         </div>
         <ul class="list-group">
             <li class="list-group-item">
-                <a href="@Url.Action("Post", "Post", new { id = post.Id})">
+                <a href="@Url.RouteUrl("Post", new { id = post.Id})">
                     Comments(@Model.Comments.Count(x => x.PostId == post.Id))
                 </a>
             </li>
