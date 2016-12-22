@@ -6,6 +6,14 @@
 }
 
 <h2>#@ViewBag.TagName</h2>
+@if (Model.Following == null)
+{
+    <a href="@Url.Action("Follow", "Following", new {tag = @Model.Tag.Name})">Follow Tag</a>
+}
+else
+{
+    <a href="@Url.Action("Follow", "Following", new {tag = @Model.Tag.Name})">Unfollow Tag</a>
+}
 @ViewBag.Name
 @if (User.Identity.IsAuthenticated)
 {

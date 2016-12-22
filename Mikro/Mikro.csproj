@@ -208,6 +208,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
+    <Compile Include="Controllers\FollowingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PostController.cs" />
@@ -221,10 +222,15 @@
     <Compile Include="Migrations\201612192323303_FirstMigration.Designer.cs">
       <DependentUpon>201612192323303_FirstMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612220017325_AddFollowingModel.cs" />
+    <Compile Include="Migrations\201612220017325_AddFollowingModel.Designer.cs">
+      <DependentUpon>201612220017325_AddFollowingModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\CommentPlus.cs" />
+    <Compile Include="Models\Following.cs" />
     <Compile Include="Models\PostPlus.cs" />
     <Compile Include="Models\PostTag.cs" />
     <Compile Include="Models\Tag.cs" />
@@ -328,9 +334,9 @@
     <Content Include="Views\Tag\DisplayTagContent.cshtml" />
     <Content Include="Views\Shared\_DisplayPostsPartial.cshtml" />
     <Content Include="Views\UserProfile\Index.cshtml" />
+    <Content Include="Views\Following\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\ControllerExtensions\" />
     <Folder Include="Views\UnitOfWork\" />
   </ItemGroup>
   <ItemGroup>
@@ -340,6 +346,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201612192323303_FirstMigration.resx">
       <DependentUpon>201612192323303_FirstMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612220017325_AddFollowingModel.resx">
+      <DependentUpon>201612220017325_AddFollowingModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
