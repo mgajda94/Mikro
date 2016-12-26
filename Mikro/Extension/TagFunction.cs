@@ -14,7 +14,10 @@ namespace Mikro.Extension
         public string TagToUrl(string content, IEnumerable<string> tagsList)
         {
             string name = "";
-            string output = "";
+            string output = content;
+
+            if (tagsList == null)
+                return content;
 
             foreach (var item in tagsList)
             {

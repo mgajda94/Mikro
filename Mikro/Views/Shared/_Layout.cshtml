@@ -6,7 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    @Scripts.Render("http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -21,7 +21,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Strona Glowna", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Active", "Index", "Home")</li>
+                    <li>@Html.ActionLink("My Follows", "Index", "Following")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

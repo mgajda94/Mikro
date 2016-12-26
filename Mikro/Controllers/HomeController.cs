@@ -31,38 +31,19 @@ namespace Mikro.Controllers
 
             var viewModel = new HomeViewModel
             {
-                Posts = uow.Repository<Post>().GetOverview().OrderByDescending(x => x.PostedOn).ToList(),
-                Comments = uow.Repository<Comment>().GetOverview().ToList(),
-                Plus = uow.Repository<PostPlus>().GetOverview(x => x.UserId == user).ToList()
+                Posts = uow.Repository<Post>()
+                    .GetOverview()
+                    .OrderByDescending(x => x.PostedOn)
+                    .ToList(),
+
+                Comments = uow.Repository<Comment>()
+                    .GetOverview().ToList(),
+                Plus = uow.Repository<PostPlus>()
+                    .GetOverview(x => x.UserId == user)
+                    .ToList()
             };
 
             return View(viewModel);
-        }
-
-        [HttpPost]
-        public ActionResult Index(HomeViewModel viewModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            var tagFunction = new TagFunction();          
-            IEnumerable<string> tags = Regex.Split(viewModel.Content, @"\s+")
-                .Where(i => i.StartsWith("#"));            
-            var output = tagFunction.TagToUrl(viewModel.Content, tags);
-            var post = new Post
-            {
-                UserId = User.Identity.GetUserId(),
-                Username = User.Identity.GetUserName(),
-                PostedOn = DateTime.Now,
-                Content = viewModel.Content,
-                PlusCounter = 0,
-                PostedContent = output
-            };
-            uow.Repository<Post>().Add(post);         
-            tagFunction.IsExist(tags, uow, post);
-            uow.SaveChanges();
-            return RedirectToAction("Index", "Home");
         }
     }
 }

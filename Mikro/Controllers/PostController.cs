@@ -99,10 +99,12 @@ namespace Mikro.Controllers
             var viewModel = new CommentFormViewModel
             {
                 Post = uow.Repository<Post>().Select(x => x.Id == id),
+
                 Comments = uow.Repository<Comment>()
                 .GetOverview(x => x.PostId == id)
                 .OrderBy(x => x.PostedOn)
                 .ToList(),
+
                 Plus = uow.Repository<CommentPlus>().GetOverview(x => x.UserId == user).ToList()
             };
 
@@ -110,37 +112,6 @@ namespace Mikro.Controllers
                 return HttpNotFound();
 
             return View(viewModel);
-        }
-  
-        [HttpPost]
-        public ActionResult Post(int id, CommentFormViewModel viewModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return RedirectToAction("Post", "Post");
-            }
-
-            var post = uow.Repository<Post>().Select(x => x.Id == id);
-            var tagFunction = new TagFunction();
-            
-            IEnumerable<string> tags = Regex.Split(viewModel.Content, @"\s+").Where(i => i.StartsWith("#"));
-            
-            var output = tagFunction.TagToUrl(viewModel.Content, tags);
-            var comment = new Comment
-            {
-                UserId = User.Identity.GetUserId(),
-                PostId = id,
-                UserName = User.Identity.GetUserName(),
-                PostedOn = DateTime.Now,
-                PostedContent = output,
-                Content = viewModel.Content,
-                Post = post
-            };
-
-            uow.Repository<Comment>().Add(comment);
-            uow.SaveChanges();
-
-            return RedirectToAction("Post", "Post");
         }
 
         public ActionResult Delete(int id)

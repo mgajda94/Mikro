@@ -29,20 +29,24 @@ namespace Mikro.Controllers
             var userId = User.Identity.GetUserId();
             ViewBag.actualUserId = userId;
             ViewBag.TagName = id;
-            var expectedTag = uow.Repository<Tag>().Select(x => x.Name == id);
-
-            var viewModel = new ViewModels.HomeViewModel()
+          
+            var viewModel = new HomeViewModel()
             {
                 Comments = uow.Repository<Comment>().GetOverview().ToList(),
                 Plus = uow.Repository<PostPlus>().GetOverview(x => x.UserId == userId).ToList(),
                 Posts = new List<Post>(),
-                Tag = uow.Repository<Tag>().Select(x => x.Name == id),
-                Following = uow.Repository<Following>().Select(x => x.UserId == userId && x.TagId == expectedTag.Id)
+                Tag = uow.Repository<Tag>().Select(x => x.Name == id)
             };
 
-            var postTag = uow.Repository<PostTag>().GetOverview(x => x.Tag == viewModel.Tag).ToList();
-            ViewBag.Kant = postTag.Count();
+            if (viewModel.Tag == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
 
+            viewModel.Following = uow.Repository<Following>()
+                .Select(x => x.UserId == userId && x.TagId == viewModel.Tag.Id);
+               
+            var postTag = uow.Repository<PostTag>().GetOverview(x => x.Tag == viewModel.Tag).ToList();
 
             foreach (var post in postTag)
             {

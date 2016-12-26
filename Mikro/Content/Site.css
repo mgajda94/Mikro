@@ -25,6 +25,32 @@ textarea {
     max-width: 100%;
 }
 
+.form-control{
+    overflow: auto;
+    background-color: #333333;  
+    color: white;
+    border: 2px solid #000000;
+	border-radius: 4px;
+    margin-bottom: 10px;
+    display:block;
+    -webkit-box-shadow: inset 2px 2px 2px 0px #262626;
+    -moz-box-shadow: inset 2px 2px 2px 0px #262626;
+    box-shadow: inset 2px 2px 2px 0px #262626;
+    padding: 6px;
+}
+.text-box .multi-line{
+    overflow: auto;
+    background-color: #333333;  
+    color: white;
+    border: 2px solid #000000;
+	border-radius: 4px;
+    margin-bottom: 10px;
+    display:block;
+    -webkit-box-shadow: inset 2px 2px 2px 0px #262626;
+    -moz-box-shadow: inset 2px 2px 2px 0px #262626;
+    box-shadow: inset 2px 2px 2px 0px #262626;
+    padding: 6px;
+}
 textarea {
     overflow: auto;
     background-color: #333333;  
@@ -110,4 +136,12 @@ a.plus-container{
 
 .panel-heading a:hover{
     text-decoration:none;
+}
+
+.actions > a {
+    display: none;
+}
+
+.actions > a:hover {
+    display: inline-block;
 }

@@ -6,14 +6,9 @@
 }
 
 <h2>#@ViewBag.TagName</h2>
-@if (Model.Following == null)
-{
-    <a href="@Url.Action("Follow", "Following", new {tag = @Model.Tag.Name})">Follow Tag</a>
-}
-else
-{
-    <a href="@Url.Action("Follow", "Following", new {tag = @Model.Tag.Name})">Unfollow Tag</a>
-}
+<button tag-name="@Model.Tag.Name" id="follow" isfollowing="@Model.Following"
+        class="btn btn-sm pull-right">Follow</button>
+
 @ViewBag.Name
 @if (User.Identity.IsAuthenticated)
 {
@@ -29,3 +24,49 @@ else
 }
 
 @Html.Partial("~/Views/Shared/_DisplayPostsPartial.cshtml")
+
+@section scripts{
+    <script>
+        $(function() {
+            if ($("#follow").attr("isfollowing")==null) {
+                $("#follow")
+                    .text("Follow")
+                    .addClass("btn-info");
+            } else {
+                $("#follow")
+                    .text("Unfollow")
+                    .addClass("btn-danger");
+            }
+        });
+
+        $(function () {
+            $("#follow").click(function(e) {
+                var button = $(e.target);
+                $.ajax({
+                    url: "/api/following/follow",
+                    type: "POST",
+                    data: { TagName: button.attr("tag-name") },
+                    succes: function(data) {
+                        if ($("#follow").attr("isfollowing") == null) {
+                            button
+                                .text("Follow")
+                                .removeClass("btn-danger")
+                                .addClass("btn-info");
+                        } else {
+                            button
+                                .text("Unfollow")
+                                .removeClass("btn-info")
+                                .addClass("btn-danger");
+                        }
+                        console.log("Succes: ", data);
+                    },
+                    error: function() {
+                        console.log("error");
+                    }
+
+                });
+                location.reload();
+            });
+        });
+    </script>
+}

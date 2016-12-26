@@ -29,13 +29,33 @@
 @Html.Partial("_DisplayingCommentsPartial")
 @if (User.Identity.IsAuthenticated)
 {
-    using (Html.BeginForm("Post", "Post"))
-    {
-        <div class="form-group">
-            @Html.TextAreaFor(m => m.Content, 5, 100, null)
+    <div class="form-group">
+        <form method="post" id="postForm" enctype="application/x-www-form-urlencoded">
             <div>
-                <button type="submit" class="btn btn-primary">Wyslij</button>
+                <textarea class="form-control" id="Content" TextMode="multiline" Name="Content" Rows="2"></textarea>
             </div>
-        </div>
-    }
+            <div>
+                <button post-id="@Model.Post.Id" type="submit" id="addComment" class="btn btn-primary">Wyslij</button>
+            </div>
+        </form>
+    </div>
 }
+
+<script type="text/javascript">
+  
+    $(function() {
+        $("#addComment").submit(function () {
+            $.ajax({
+                url: "api/comment",
+                type: "POST",
+                data: {Content: $("#Content").val(), PostId: $("#Content").attr("post-id")},
+                succes: function(data) {
+                    $('#addComment').unbind('submit').submit();
+                },
+                error: function() {
+                    console.log("ERROR");
+                }
+            });
+        });
+    });
+</script>

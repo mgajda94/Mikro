@@ -16,6 +16,7 @@ namespace Mikro.ViewModels
         public string PostedContent { get; set; }
 
         public Following Following { get; set; }
+        public bool isFollowing { get; set; }
         public int CommentCounter { get; set; }
         public IList<PostPlus> Plus { get; set; }
         public IList<Comment> Comments { get; set; }

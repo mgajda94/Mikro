@@ -5,16 +5,41 @@
 <h2>Nowe Wpisy</h2>
 @if (User.Identity.IsAuthenticated)
 {
-    using (Html.BeginForm("Index", "Home"))
-    {
-        <div class="form-group">
-            @Html.TextAreaFor(m => m.Content, 5, 900, new { @placeholder = "Enter text here" })
+    <div class="form-group">
+        <form method="post" id="postForm" enctype="application/x-www-form-urlencoded">
+            @Html.AntiForgeryToken()
             <div>
-                <button type="submit" class="btn btn-primary">Wyslij</button>
+                <textarea class="form-control" id="Content" TextMode ="multiline" Name="Content" Rows="2"></textarea>
             </div>
-        </div>
-    }
+            <div>
+                <button type="submit" id="addPost" class="btn btn-primary">Wyslij</button>
+            </div>
+        </form>
+    </div>
 }
 
 @Html.Partial("~/Views/Shared/_DisplayPostsPartial.cshtml")
+
+@section scripts{
+<script type="text/javascript">
+    $(function() {
+        $("#addPost").submit(function () {
+            $.ajax({
+                url: "api/posts",
+                type: "POST",
+                data: {Content: $("#Content").val()},                  
+                succes: function(data) {
+                    $('#addPost').unbind('submit').submit();
+                },
+                error: function() {
+                    console.log("ERROR");
+                }
+            });
+        });
+    });
+</script>
+}
+
+
+
     

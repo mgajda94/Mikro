@@ -46,32 +46,6 @@ namespace Mikro.Controllers
                 viewModel.Posts.Add(post);
 
             return View(viewModel);
-        }
-
-        public ActionResult Follow(string tag)
-        {
-            var userId = User.Identity.GetUserId();           
-            var expectedTag = uow.Repository<Tag>().Select(x => x.Name == tag);
-
-            if (expectedTag == null)
-                return HttpNotFound();    
-                    
-            var following = uow.Repository<Following>().Select(x => x.UserId == userId && x.TagId == expectedTag.Id);
-            if (following == null)
-            {
-                var follow = new Following()
-                {
-                    UserId = userId,
-                    TagId = expectedTag.Id
-                };
-                uow.Repository<Following>().Add(follow);
-                uow.SaveChanges();
-                return RedirectToAction("DisplayTagContent", "Tag", new {id = tag});
-            }
-            uow.Repository<Following>().Delete(following);
-            uow.SaveChanges();
-            return RedirectToAction("DisplayTagContent", "Tag", new { id = tag });
-            
-        }
+        }       
     }
 }
