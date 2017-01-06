@@ -12,21 +12,19 @@ namespace Mikro.Controllers
 {
     public class CommentController : Controller
     {
-        private UnitOfWork uow = null;
-        public CommentController()
+        private UnitOfWork uow;
+        private readonly ApplicationDbContext _context;
+        public CommentController(ApplicationDbContext context)
         {
-            uow = new UnitOfWork();
+            _context = context;
+            uow = new UnitOfWork(context);
         }
-        public CommentController(UnitOfWork _uow)
-        {
-            this.uow = _uow;
-        }
-
+        
         [Route("Post/Edit/{id:int}")]
         public ActionResult EditComment(int id)
         {
-            var comment = uow.Repository<Comment>().Select(x => x.Id == id);
-
+            var comment = uow.Comments.GetCommentById(id);
+            
             if (comment == null | comment.UserId != User.Identity.GetUserId())
                 return HttpNotFound();
             return View(comment);
@@ -44,20 +42,19 @@ namespace Mikro.Controllers
             IEnumerable<string> tags = Regex.Split(comment.Content, @"\s+").Where(i => i.StartsWith("#"));
             var output = tagFunction.TagToUrl(comment.Content, tags);
 
-            var dbComment = uow.Repository<Comment>().Select(x => x.Id == comment.Id);
+            var dbComment = uow.Comments.GetCommentById(comment.Id);
+
             dbComment.Content = comment.Content;
             dbComment.PostedContent = output;
             uow.SaveChanges();
-
             return RedirectToAction("Post", "Post", new {id = dbComment.PostId });
         }
       
         public ActionResult Delete(int id)
         {
-            var comment = uow.Repository<Comment>().Select(x => x.Id == id);
-            uow.Repository<Comment>().Delete(comment);
+            var comment = uow.Comments.GetCommentById(id);
+            uow.Comments.Delete(comment);
             uow.SaveChanges();
-
             return RedirectToAction("Post", "Post", new { id = comment.PostId });
         }
 
@@ -65,31 +62,26 @@ namespace Mikro.Controllers
         public ActionResult PlusComment(int id)
         {
             var userId = User.Identity.GetUserId();
-            var comment = uow.Repository<Comment>().Select(x => x.Id == id);
+            var comment = uow.Comments.GetCommentById(id);
 
-            var postPlus = uow.Repository<CommentPlus>().GetPlus(x => x.CommentId == id, x => x.UserId == userId);
-
+            var postPlus = uow.CommentPluses.GetCommentPlus(userId, id);
+           
             if (postPlus != null)
             {
                 comment.PlusCounter -= 1;
-                uow.Repository<CommentPlus>().Delete(postPlus);
+                uow.CommentPluses.Delete(postPlus);
                 uow.SaveChanges();
                 return RedirectToAction("Post", "Post", new { id = comment.PostId });
             }
-
-            else
+            var plus = new CommentPlus
             {
-                var plus = new CommentPlus
-                {
-                    CommentId = id,
-                    UserId = userId
-                };
+                CommentId = id,
+                UserId = userId
+            };
 
-                comment.PlusCounter += 1;
-                uow.Repository<CommentPlus>().Add(plus);
-                uow.SaveChanges();
-            }
-
+            comment.PlusCounter += 1;
+            uow.CommentPluses.Add(plus);
+            uow.SaveChanges();           
             return RedirectToAction("Post", "Post", new { id = comment.PostId });
         }
     }

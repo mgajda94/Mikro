@@ -16,10 +16,12 @@ namespace Mikro.Controllers.Api
 {
     public class CommentController : ApiController
     {
+        private readonly ApplicationDbContext _context;
         private UnitOfWork uow = null;
-        public CommentController()
+        public CommentController(ApplicationDbContext context)
         {
-            uow = new UnitOfWork();
+            _context = context;
+            uow = new UnitOfWork(context);
         }
         public CommentController(UnitOfWork _uow)
         {
@@ -34,7 +36,7 @@ namespace Mikro.Controllers.Api
                 return BadRequest(ModelState);
             }
 
-            var post = uow.Repository<Post>().Select(x => x.Id == dto.PostId);
+            var post = uow.Posts.GetPost(dto.PostId);
             var tagFunction = new TagFunction();
 
             IEnumerable<string> tags = Regex.Split(dto.Content, @"\s+").Where(i => i.StartsWith("#"));
@@ -51,7 +53,7 @@ namespace Mikro.Controllers.Api
                 Post = post
             };
 
-            uow.Repository<Comment>().Add(comment);
+            uow.Comments.Add(comment);
             uow.SaveChanges();
             return Ok();
         }

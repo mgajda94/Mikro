@@ -12,36 +12,33 @@ namespace Mikro.Controllers
 {
     public class FollowingController : Controller
     {
+        private readonly ApplicationDbContext _context;
         private UnitOfWork uow;
 
         public FollowingController()
         {
-            uow = new UnitOfWork();
-        }
-
-        public FollowingController(UnitOfWork _uow)
-        {
-            uow = _uow;
+            uow = new UnitOfWork(_context);
+            _context = new ApplicationDbContext();
         }
 
         public ActionResult Index()
         {
             List<PostTag> postTags = new List<PostTag>();
             List<Post> Posts = new List<Post>();
+
             var userId = User.Identity.GetUserId();
-            var following = uow.Repository<Following>().GetOverview(x => x.UserId == userId).ToList();
+            var following = uow.Followings.GetFollowings(userId);
+
             var viewModel = new HomeViewModel
             {
-                Comments = uow.Repository<Comment>().GetOverview().ToList(),
-                Plus = uow.Repository<PostPlus>().GetOverview(x => x.UserId == userId).ToList()
+                Comments = uow.Comments.GetComments(),
+                Plus = uow.PostPluses.GetPostPlusByUser(userId)
             };
             
             foreach (var tag in following)
-                postTags.AddRange(uow.Repository<PostTag>().GetOverview(x => x.TagId == tag.TagId));               
-
+                postTags.AddRange(uow.PostTags.GetPostTagsByTagId(tag.TagId));                          
             foreach (var post in postTags)
-                 Posts.AddRange(uow.Repository<Post>().GetOverview(x => x.Id == post.PostId));
-
+                 Posts.AddRange(uow.Posts.GetPostsById(post.PostId));
             foreach(var post in Posts)
                 viewModel.Posts.Add(post);
 

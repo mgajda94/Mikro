@@ -14,16 +14,13 @@ namespace Mikro.Controllers.Api
     public class FollowingController : ApiController
     {
         private UnitOfWork uow;
-
-        public FollowingController()
+        private readonly ApplicationDbContext _context;
+        public FollowingController(ApplicationDbContext context)
         {
-            uow = new UnitOfWork();
+            _context = context;
+            uow = new UnitOfWork(_context);
         }
 
-        public FollowingController(UnitOfWork _uow)
-        {
-            uow = _uow;
-        }
 
         public IHttpActionResult Get()
         {
@@ -34,12 +31,12 @@ namespace Mikro.Controllers.Api
         public void Follow(FollowingDto dto)
         {
             var userId = User.Identity.GetUserId();
-            var searchedTag = uow.Repository<Tag>().Select(x => x.Name == dto.TagName);
+            var searchedTag = uow.Tags.GetTagByName(dto.TagName);
 
             //if (searchedTag == null)
                 //return BadRequest(ModelState);
 
-            var following = uow.Repository<Following>().Select(x => x.UserId == userId && x.TagId == searchedTag.Id);
+            var following = uow.Followings.GetFollowing(userId, searchedTag.Id);
             if (following == null)
             {
                 var follow = new Following()
@@ -48,13 +45,13 @@ namespace Mikro.Controllers.Api
                     TagId = searchedTag.Id
                 };
 
-                uow.Repository<Following>().Add(follow);
+                uow.Followings.Add(follow);
                 uow.SaveChanges();
                 //return Ok();
             }
             else
             {
-                uow.Repository<Following>().Delete(following);
+                uow.Followings.Delete(following);
                 uow.SaveChanges();
             }           
             //return Ok();

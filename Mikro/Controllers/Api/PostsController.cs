@@ -17,15 +17,11 @@ namespace Mikro.Controllers.Api
     public class PostsController : ApiController
     {
         private UnitOfWork uow;
-
-        public PostsController()
+        private readonly ApplicationDbContext _context;
+        public PostsController(ApplicationDbContext context)
         {
-            uow = new UnitOfWork();
-        }
-
-        public PostsController(UnitOfWork _uow)
-        {
-            uow = _uow;
+            _context = context;
+            uow = new UnitOfWork(_context);
         }
 
         public IHttpActionResult Get()
@@ -56,7 +52,7 @@ namespace Mikro.Controllers.Api
                 PlusCounter = 0,
                 PostedContent = output
             };
-            uow.Repository<Post>().Add(post);
+            uow.Posts.Add(post);
             tagFunction.IsExist(tags, uow, post);
             uow.SaveChanges();
             return Ok();

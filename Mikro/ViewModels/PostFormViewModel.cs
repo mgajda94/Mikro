@@ -25,6 +25,6 @@ namespace Mikro.ViewModels
 
         public IList<Comment> Comments { get; set; }
 
-        public IList<Post> Posts { get; set; }
+        public IEnumerable<Post> Posts { get; set; }
     }
 }

@@ -13,10 +13,11 @@ namespace Mikro.Controllers
     public class UserProfileController : Controller
     {
         private UnitOfWork uow;
-
-        public UserProfileController()
+        private readonly ApplicationDbContext _context;
+        public UserProfileController(ApplicationDbContext context)
         {
-                uow = new UnitOfWork();
+            _context = context;
+            uow = new UnitOfWork(_context);
         }
 
         public UserProfileController(UnitOfWork _uow)
@@ -30,9 +31,9 @@ namespace Mikro.Controllers
             var userId = User.Identity.GetUserId();
             var viewModel = new HomeViewModel
             {
-                Posts = uow.Repository<Post>().GetOverview(x=>x.Username == id).OrderByDescending(x => x.PostedOn).ToList(),
-                Comments = uow.Repository<Comment>().GetOverview().ToList(),
-                Plus = uow.Repository<PostPlus>().GetOverview(x => x.UserId == userId).ToList()
+                Posts = uow.Posts.GetAllPostsByUsername(id),
+                Comments = uow.Comments.GetComments(),
+                Plus = uow.PostPluses.GetPostPlusByUser(userId)
             };
             return View(viewModel);
         }

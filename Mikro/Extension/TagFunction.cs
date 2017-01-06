@@ -38,23 +38,23 @@ namespace Mikro.Extension
             {
                 name = item.Replace("#", "");
 
-                var existingTag = uow.Repository<Tag>().Select(x => x.Name == name);
+                var existingTag = uow.Tags.GetTagByName(name);
                 if (existingTag == null)
                 {
                     var tag = new Tag { Name = name };
-                    uow.Repository<Tag>().Add(tag);
+                    uow.Tags.Add(tag);
 
                     var postTag = new PostTag
                     {
                         Post = post,
                         Tag = tag
                     };
-                    uow.Repository<Tag>().Add(tag);
-                    uow.Repository<PostTag>().Add(postTag);
+                    uow.Tags.Add(tag);
+                    uow.PostTags.Add(postTag);
                 }
                 else
                 {
-                    var postTags = uow.Repository<PostTag>().GetOverview(x => x.Tag == existingTag);
+                    var postTags = uow.PostTags.GetPostTagsByTag(existingTag);
                     foreach (var tag in postTags)
                     {
                         if (tag.Post == post)
@@ -67,7 +67,7 @@ namespace Mikro.Extension
                             Post = post,
                             Tag = existingTag
                         };
-                        uow.Repository<PostTag>().Add(postTag);
+                        uow.PostTags.Add(postTag);
                     }                  
                 }              
             }

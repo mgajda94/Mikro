@@ -13,15 +13,15 @@ namespace Mikro.Controllers
     [RoutePrefix("Tag")]
     public class TagController : Controller
     {
-        private UnitOfWork uow ;
+
+        private readonly ApplicationDbContext _context;
+        private UnitOfWork uow;
+
         public TagController()
         {
-            uow = new UnitOfWork();
-        }
-        public TagController(UnitOfWork _uow)
-        {
-            this.uow = _uow;
-        }
+            uow = new UnitOfWork(_context);
+            _context = new ApplicationDbContext();
+        }       
 
         [Route("/{tagId:string}")]
         public ActionResult DisplayTagContent(string id)
@@ -32,25 +32,23 @@ namespace Mikro.Controllers
           
             var viewModel = new HomeViewModel()
             {
-                Comments = uow.Repository<Comment>().GetOverview().ToList(),
-                Plus = uow.Repository<PostPlus>().GetOverview(x => x.UserId == userId).ToList(),
+                Comments = uow.Comments.GetComments(),
+                Plus = uow.PostPluses.GetPostPlusByUser(userId),
                 Posts = new List<Post>(),
-                Tag = uow.Repository<Tag>().Select(x => x.Name == id)
+                Tag = uow.Tags.GetTagByName(id)
             };
 
             if (viewModel.Tag == null)
             {
                 return RedirectToAction("Index", "Home");
             }
-
-            viewModel.Following = uow.Repository<Following>()
-                .Select(x => x.UserId == userId && x.TagId == viewModel.Tag.Id);
-               
-            var postTag = uow.Repository<PostTag>().GetOverview(x => x.Tag == viewModel.Tag).ToList();
-
+            viewModel.Following = uow.Followings.GetFollowing(userId, viewModel.Tag.Id);
+            
+            var postTag = uow.PostTags.GetPostTagsByTag(viewModel.Tag);
+           
             foreach (var post in postTag)
             {
-                var eachPost = uow.Repository<Post>().Select(x => x.Id == post.PostId);
+                var eachPost = uow.Posts.GetPost(post.PostId);
                 viewModel.Posts.Add(eachPost);
             }
 

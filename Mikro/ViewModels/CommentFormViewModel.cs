@@ -13,8 +13,8 @@ namespace Mikro.ViewModels
         public string Content { get; set; }
 
         public string UserName { get; set; }
-        public IList<CommentPlus> Plus { get; set; }
-        public IList<Comment> Comments { get; set; }
+        public ICollection<CommentPlus> Plus { get; set; }
+        public ICollection<Comment> Comments { get; set; }
         public Post Post { get; set; }
     }
 }

@@ -2,28 +2,21 @@
 using Mikro.Models;
 using Mikro.Repository;
 using Mikro.ViewModels;
-using System;
-using System.Collections;
-using System.Linq;
 using System.Web.Mvc;
-using System.Text.RegularExpressions;
-using System.Collections.Generic;
-using Mikro.Extension;
 
 namespace Mikro.Controllers
 {
     public class HomeController : Controller
     {
         private UnitOfWork uow;
+        private readonly ApplicationDbContext _context;
+
         public HomeController()
         {
-            uow = new UnitOfWork();
+            _context = new ApplicationDbContext();
+            uow = new UnitOfWork(_context);          
         }
-        public HomeController(UnitOfWork _uow)
-        {
-            this.uow = _uow;
-        }
-
+        
         public ActionResult Index()
         {            
             ViewBag.actualUserId = User.Identity.GetUserId();
@@ -31,16 +24,9 @@ namespace Mikro.Controllers
 
             var viewModel = new HomeViewModel
             {
-                Posts = uow.Repository<Post>()
-                    .GetOverview()
-                    .OrderByDescending(x => x.PostedOn)
-                    .ToList(),
-
-                Comments = uow.Repository<Comment>()
-                    .GetOverview().ToList(),
-                Plus = uow.Repository<PostPlus>()
-                    .GetOverview(x => x.UserId == user)
-                    .ToList()
+                Posts = uow.Posts.GetAllPosts(),
+                Comments = uow.Comments.GetComments(),
+                Plus = uow.PostPluses.GetPostPlusByUser(user)
             };
 
             return View(viewModel);

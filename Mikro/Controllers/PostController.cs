@@ -13,17 +13,14 @@ namespace Mikro.Controllers
 {
     public class PostController : Controller
     {
-        private UnitOfWork uow = null;
-
+        private UnitOfWork uow;
+        private readonly ApplicationDbContext _context;
         public PostController()
         {
-            uow = new UnitOfWork();
-        }
-
-        public PostController(UnitOfWork _uow)
-        {
-            this.uow = _uow;
-        }
+            uow = new UnitOfWork(_context);
+            _context = new ApplicationDbContext();
+            _context = new ApplicationDbContext();
+        }       
 
         public ActionResult Index()
         {
@@ -31,7 +28,7 @@ namespace Mikro.Controllers
 
             var viewModel = new PostFormViewModel
             {
-                Posts = uow.Repository<Post>().GetOverview().OrderByDescending(x=>x.PostedOn).ToList()
+                Posts = uow.Posts.GetAllPosts()
             };
 
             return View(viewModel);
@@ -53,7 +50,7 @@ namespace Mikro.Controllers
                 Content = viewModel.Content
             };
 
-            uow.Repository<Post>().Add(post);
+            uow.Posts.Add(post);
             uow.SaveChanges();
 
             return RedirectToAction("Index", "Post");
@@ -62,7 +59,7 @@ namespace Mikro.Controllers
         [Route("/Edit/{id:int}")]
         public ActionResult EditPost(int id)
         {
-            var post = uow.Repository<Post>().Select(x=>x.Id == id);
+            var post = uow.Posts.GetPost(id);
 
             if (post == null | post.UserId != User.Identity.GetUserId())
                 return HttpNotFound();
@@ -73,19 +70,19 @@ namespace Mikro.Controllers
         [HttpPost]
         public ActionResult EditPost(Post post)
         {
+            var tagFunction = new TagFunction();
             if (!ModelState.IsValid)
             {
                 return View();
             }
 
-            var dbPost = uow.Repository<Post>().Select(x=>x.Id == post.Id);
-            var tagFunction = new TagFunction();
-            
+            var editPost = uow.Posts.GetPost(post.Id);
+                        
             IEnumerable<string> tags = Regex.Split(post.Content, @"\s+").Where(i => i.StartsWith("#"));
             var output = tagFunction.TagToUrl(post.Content, tags);
 
-            dbPost.Content = post.Content;
-            dbPost.PostedContent = output;
+            editPost.Content = post.Content;
+            editPost.PostedContent = output;
             uow.SaveChanges();
 
             return RedirectToAction("Index", "Home");
@@ -95,17 +92,12 @@ namespace Mikro.Controllers
         public ActionResult Post(int id)
         {
             ViewBag.actualUserId = User.Identity.GetUserId();
-            var user = User.Identity.GetUserId();
+            var userId = User.Identity.GetUserId();
             var viewModel = new CommentFormViewModel
             {
-                Post = uow.Repository<Post>().Select(x => x.Id == id),
-
-                Comments = uow.Repository<Comment>()
-                .GetOverview(x => x.PostId == id)
-                .OrderBy(x => x.PostedOn)
-                .ToList(),
-
-                Plus = uow.Repository<CommentPlus>().GetOverview(x => x.UserId == user).ToList()
+                Post = uow.Posts.GetPost(id),
+                Comments = uow.Comments.GetCommentsById(id),
+                Plus = uow.CommentPluses.GetAllCommentPlusesByUser(userId)
             };
 
             if (viewModel.Post == null)
@@ -116,8 +108,8 @@ namespace Mikro.Controllers
 
         public ActionResult Delete(int id)
         {
-            var post = uow.Repository<Post>().Select(x => x.Id == id);
-            uow.Repository<Post>().Delete(post);
+            var post = uow.Posts.GetPost(id);
+            uow.Posts.Delete(post);
             uow.SaveChanges();
 
             return RedirectToAction("Index", "Home");
@@ -127,14 +119,14 @@ namespace Mikro.Controllers
         public ActionResult PlusPost(int id)
         {
             var userId = User.Identity.GetUserId();
-            var post = uow.Repository<Post>().Select(x => x.Id == id);
+            var post = uow.Posts.GetPost(id);
 
-            var postPlus = uow.Repository<PostPlus>().GetPlus(x => x.PostId == id, x => x.UserId == userId);
+            var postPlus = uow.PostPluses.GetPostPlusByPostIdAndUserId(id, userId);
 
             if (postPlus != null)
             {
                 post.PlusCounter -= 1;
-                uow.Repository<PostPlus>().Delete(postPlus);
+                uow.PostPluses.Delete(postPlus);
                 uow.SaveChanges();
                 return RedirectToAction("Index", "Home");
             }            
@@ -144,7 +136,7 @@ namespace Mikro.Controllers
                 UserId = userId
             };
             post.PlusCounter += 1;
-            uow.Repository<PostPlus>().Add(plus);
+            uow.PostPluses.Add(plus);
             uow.SaveChanges();          
             return RedirectToAction("Index", "Home");
         }

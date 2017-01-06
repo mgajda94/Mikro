@@ -12,10 +12,7 @@ namespace Mikro.Tests
         [TestMethod]
         public void TestPlusPosts()
         {
-           
-
-            var controller = new MikroController();
-            
+                 
         }
     }
 }

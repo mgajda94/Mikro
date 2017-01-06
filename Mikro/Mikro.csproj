@@ -254,8 +254,15 @@
     <Compile Include="Models\PostPlus.cs" />
     <Compile Include="Models\PostTag.cs" />
     <Compile Include="Models\Tag.cs" />
+    <Compile Include="Repository\CommentPlusRepository.cs" />
+    <Compile Include="Repository\CommentRepository.cs" />
+    <Compile Include="Repository\FollowingRepository.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\PostPlusRepository.cs" />
+    <Compile Include="Repository\PostRepository.cs" />
+    <Compile Include="Repository\PostTagRepository.cs" />
+    <Compile Include="Repository\TagRepository.cs" />
     <Compile Include="Repository\UnitOfWork.cs" />
     <Compile Include="ViewModels\CommentFormViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
