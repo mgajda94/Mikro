@@ -6,16 +6,16 @@ using System.Web;
 
 namespace Mikro.Repository
 {
-    public class UnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _context;
-        public PostRepository Posts { get; private set; }
-        public CommentRepository Comments { get; private set; }
-        public PostPlusRepository PostPluses { get; private set; }
-        public FollowingRepository Followings { get; private set; }
-        public PostTagRepository PostTags { get; private set; }
-        public CommentPlusRepository CommentPluses { get; set; }
-        public TagRepository Tags { get; set; }
+        public IPostRepository Posts { get; private set; }
+        public ICommentRepository Comments { get; private set; }
+        public IPostPlusRepository PostPluses { get; private set; }
+        public IFollowingRepository Followings { get; private set; }
+        public IPostTagRepository PostTags { get; private set; }
+        public ICommentPlusRepository CommentPluses { get; private set; }
+        public ITagRepository Tags { get; private set; }
 
         public UnitOfWork(ApplicationDbContext context)
         {

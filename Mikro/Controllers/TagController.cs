@@ -13,14 +13,10 @@ namespace Mikro.Controllers
     [RoutePrefix("Tag")]
     public class TagController : Controller
     {
-
-        private readonly ApplicationDbContext _context;
-        private UnitOfWork uow;
-
-        public TagController()
+        private readonly IUnitOfWork uow;
+        public TagController(IUnitOfWork _uow)
         {
-            uow = new UnitOfWork(_context);
-            _context = new ApplicationDbContext();
+            uow = _uow;
         }       
 
         [Route("/{tagId:string}")]
@@ -44,7 +40,7 @@ namespace Mikro.Controllers
             }
             viewModel.Following = uow.Followings.GetFollowing(userId, viewModel.Tag.Id);
             
-            var postTag = uow.PostTags.GetPostTagsByTag(viewModel.Tag);
+            var postTag = uow.PostTags.GetPostTagsByTagId(viewModel.Tag.Id);
            
             foreach (var post in postTag)
             {
@@ -53,7 +49,6 @@ namespace Mikro.Controllers
             }
 
             viewModel.Posts.GroupBy(x => x.PostedOn);
-
             return View(viewModel);
         }
     }

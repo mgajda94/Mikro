@@ -12,13 +12,11 @@ namespace Mikro.Controllers
 {
     public class FollowingController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        private UnitOfWork uow;
+        private readonly IUnitOfWork uow;
 
-        public FollowingController()
+        public FollowingController(IUnitOfWork _uow)
         {
-            uow = new UnitOfWork(_context);
-            _context = new ApplicationDbContext();
+            uow = _uow;
         }
 
         public ActionResult Index()

@@ -4,7 +4,7 @@ using Mikro.Models;
 
 namespace Mikro.Repository
 {
-    public class PostRepository
+    public class PostRepository : IPostRepository
     {
         private readonly ApplicationDbContext _context;
         public PostRepository(ApplicationDbContext context)

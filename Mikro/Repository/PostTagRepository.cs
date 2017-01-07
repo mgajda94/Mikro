@@ -6,7 +6,7 @@ using Mikro.Models;
 
 namespace Mikro.Repository
 {
-    public class PostTagRepository
+    public class PostTagRepository : IPostTagRepository
     {
         private readonly ApplicationDbContext _context;
 
@@ -15,14 +15,14 @@ namespace Mikro.Repository
             _context = context;
         }
 
-        public ICollection<PostTag> GetPostTagsByTagId(int tagId)
+        public IList<PostTag> GetPostTagsByTagId(int tagId)
         {
             return _context.PostTag
                 .Where(x => x.TagId == tagId)
                 .ToList();
         }
 
-        public ICollection<PostTag> GetPostTagsByTag(Tag tag)
+        public IList<PostTag> GetPostTagsByTag(Tag tag)
         {
             return _context.PostTag
                 .Where(x => x.Tag == tag)

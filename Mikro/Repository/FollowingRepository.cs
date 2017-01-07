@@ -6,7 +6,7 @@ using Mikro.Models;
 
 namespace Mikro.Repository
 {
-    public class FollowingRepository
+    public class FollowingRepository : IFollowingRepository
     {
         private readonly ApplicationDbContext _context;
 

@@ -6,7 +6,7 @@ using Mikro.Models;
 
 namespace Mikro.Repository
 {
-    public class CommentPlusRepository
+    public class CommentPlusRepository : ICommentPlusRepository
     {
         private readonly ApplicationDbContext _context;
 

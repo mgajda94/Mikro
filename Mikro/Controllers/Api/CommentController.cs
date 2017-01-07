@@ -16,12 +16,10 @@ namespace Mikro.Controllers.Api
 {
     public class CommentController : ApiController
     {
-        private readonly ApplicationDbContext _context;
-        private UnitOfWork uow = null;
-        public CommentController(ApplicationDbContext context)
+        private readonly IUnitOfWork uow;
+        public CommentController(IUnitOfWork _uow)
         {
-            _context = context;
-            uow = new UnitOfWork(context);
+            uow = _uow;
         }
         public CommentController(UnitOfWork _uow)
         {

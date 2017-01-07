@@ -13,13 +13,11 @@ namespace Mikro.Controllers
 {
     public class PostController : Controller
     {
-        private UnitOfWork uow;
-        private readonly ApplicationDbContext _context;
-        public PostController()
+        private readonly IUnitOfWork uow;
+
+        public PostController(IUnitOfWork _uow)
         {
-            uow = new UnitOfWork(_context);
-            _context = new ApplicationDbContext();
-            _context = new ApplicationDbContext();
+            uow = _uow;
         }       
 
         public ActionResult Index()
@@ -96,7 +94,7 @@ namespace Mikro.Controllers
             var viewModel = new CommentFormViewModel
             {
                 Post = uow.Posts.GetPost(id),
-                Comments = uow.Comments.GetCommentsById(id),
+                Comments = uow.Comments.GetCommentsByPostId(id),
                 Plus = uow.CommentPluses.GetAllCommentPlusesByUser(userId)
             };
 

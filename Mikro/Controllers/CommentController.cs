@@ -12,12 +12,10 @@ namespace Mikro.Controllers
 {
     public class CommentController : Controller
     {
-        private UnitOfWork uow;
-        private readonly ApplicationDbContext _context;
-        public CommentController(ApplicationDbContext context)
+        private readonly IUnitOfWork uow;
+        public CommentController(IUnitOfWork _uow)
         {
-            _context = context;
-            uow = new UnitOfWork(context);
+            uow = _uow;
         }
         
         [Route("Post/Edit/{id:int}")]

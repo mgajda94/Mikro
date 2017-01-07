@@ -29,7 +29,7 @@ namespace Mikro.Extension
             return output;
         }
 
-        public void IsExist(IEnumerable<string> tags, UnitOfWork uow, Post post)
+        public void IsExist(IEnumerable<string> tags, IUnitOfWork uow, Post post)
         {
             string name;
             var isExist = false;

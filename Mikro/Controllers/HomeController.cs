@@ -8,13 +8,11 @@ namespace Mikro.Controllers
 {
     public class HomeController : Controller
     {
-        private UnitOfWork uow;
-        private readonly ApplicationDbContext _context;
+        private readonly IUnitOfWork uow;
 
-        public HomeController()
+        public HomeController(IUnitOfWork _uow)
         {
-            _context = new ApplicationDbContext();
-            uow = new UnitOfWork(_context);          
+            uow = _uow;
         }
         
         public ActionResult Index()

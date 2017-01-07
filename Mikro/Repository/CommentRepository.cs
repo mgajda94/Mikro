@@ -4,7 +4,7 @@ using Mikro.Models;
 
 namespace Mikro.Repository
 {
-    public class CommentRepository
+    public class CommentRepository : ICommentRepository
     {
         private readonly ApplicationDbContext _context;
 
@@ -13,13 +13,14 @@ namespace Mikro.Repository
             _context = context;
         }
 
-        public IList<Comment> GetCommentsById(int commentId)
+        public IList<Comment> GetCommentsByPostId(int postId)
         {
             return _context.Comments
-                .Where(x => x.Id == commentId)
+                .Where(x => x.PostId == postId)
                 .OrderByDescending(x => x.PostedOn)
                 .ToList();
         }
+
 
         public IList<Comment> GetComments()
         {

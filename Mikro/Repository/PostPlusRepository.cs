@@ -4,7 +4,7 @@ using Mikro.Models;
 
 namespace Mikro.Repository
 {
-    public class PostPlusRepository
+    public class PostPlusRepository : IPostPlusRepository
     {
         private readonly ApplicationDbContext _context;
 
@@ -22,7 +22,8 @@ namespace Mikro.Repository
 
         public PostPlus GetPostPlusByPostIdAndUserId(int id, string userId)
         {
-            return _context.PostPluses.Single(x => x.PostId == id && x.UserId == userId);
+            return _context.PostPluses
+                .SingleOrDefault(x => (x.PostId == id && x.UserId == userId));
         }
 
         public void Add(PostPlus postPlus)

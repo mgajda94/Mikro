@@ -16,12 +16,11 @@ namespace Mikro.Controllers.Api
 {
     public class PostsController : ApiController
     {
-        private UnitOfWork uow;
-        private readonly ApplicationDbContext _context;
-        public PostsController(ApplicationDbContext context)
+        private readonly IUnitOfWork uow;
+
+        public PostsController(IUnitOfWork _uow)
         {
-            _context = context;
-            uow = new UnitOfWork(_context);
+            uow = _uow;
         }
 
         public IHttpActionResult Get()

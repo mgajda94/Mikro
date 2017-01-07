@@ -6,7 +6,7 @@ using Mikro.Models;
 
 namespace Mikro.Repository
 {
-    public class TagRepository
+    public class TagRepository : ITagRepository
     {
         private readonly ApplicationDbContext _context;
 

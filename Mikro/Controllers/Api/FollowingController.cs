@@ -13,12 +13,11 @@ namespace Mikro.Controllers.Api
 {
     public class FollowingController : ApiController
     {
-        private UnitOfWork uow;
-        private readonly ApplicationDbContext _context;
-        public FollowingController(ApplicationDbContext context)
+        private readonly IUnitOfWork uow;
+
+        public FollowingController(IUnitOfWork _uow)
         {
-            _context = context;
-            uow = new UnitOfWork(_context);
+            uow = _uow;
         }
 
 

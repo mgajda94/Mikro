@@ -12,12 +12,10 @@ namespace Mikro.Controllers
 {
     public class UserProfileController : Controller
     {
-        private UnitOfWork uow;
-        private readonly ApplicationDbContext _context;
-        public UserProfileController(ApplicationDbContext context)
+        private readonly IUnitOfWork uow;
+        public UserProfileController(IUnitOfWork _uow)
         {
-            _context = context;
-            uow = new UnitOfWork(_context);
+            uow = _uow;
         }
 
         public UserProfileController(UnitOfWork _uow)
