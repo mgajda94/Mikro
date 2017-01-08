@@ -1,4 +1,4 @@
-﻿@model Mikro.ViewModels.HomeViewModel
+﻿@model Mikro.Core.ViewModels.HomeViewModel
 @{
     ViewBag.Title = "Index";
 }
@@ -7,7 +7,6 @@
 {
     <div class="form-group">
         <form method="post" id="postForm" enctype="application/x-www-form-urlencoded">
-            @Html.AntiForgeryToken()
             <div>
                 <textarea class="form-control" id="Content" TextMode ="multiline" Name="Content" Rows="2"></textarea>
             </div>
@@ -21,15 +20,17 @@
 @Html.Partial("~/Views/Shared/_DisplayPostsPartial.cshtml")
 
 @section scripts{
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
 <script type="text/javascript">
     $(function() {
-        $("#addPost").submit(function () {
+        $("#addPost").click(function () {
             $.ajax({
-                url: "api/posts",
+                url: "api/Posts/AddPost",
                 type: "POST",
-                data: {Content: $("#Content").val()},                  
+                data: { Content: $("#Content").val() },
+                datatype: "json",
                 succes: function(data) {
-                    $('#addPost').unbind('submit').submit();
+                    $('#addPost').unbind('submit').submit().html(data);
                 },
                 error: function() {
                     console.log("ERROR");

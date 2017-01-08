@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Mikro.Models;
 using Mikro.Controllers;
 using System.Collections.Generic;
 

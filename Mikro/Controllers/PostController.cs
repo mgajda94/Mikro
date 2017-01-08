@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNet.Identity;
-using Mikro.Models;
-using Mikro.Repository;
-using Mikro.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
-using Mikro.Extension;
+using Mikro.Core;
+using Mikro.Core.Models;
+using Mikro.Core.ViewModels;
+using Mikro.Persistance.Extension;
 
 namespace Mikro.Controllers
 {

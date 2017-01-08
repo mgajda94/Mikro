@@ -2,8 +2,8 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Mikro.Models;
 using System.Linq;
+using Mikro.Core.Models;
 
 namespace Mikro.Tests
 {

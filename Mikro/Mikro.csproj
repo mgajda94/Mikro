@@ -255,56 +255,56 @@
     <Compile Include="Controllers\Api\PostsController.cs" />
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
-    <Compile Include="Dtos\AddingPostDto.cs" />
-    <Compile Include="Dtos\CommentDto.cs" />
-    <Compile Include="Dtos\FollowingDto.cs" />
-    <Compile Include="Dtos\PlusDto.cs" />
-    <Compile Include="Extension\TagFunction.cs" />
+    <Compile Include="Persistance\ApplicationDbContext.cs" />
+    <Compile Include="Core\Dtos\AddingPostDto.cs" />
+    <Compile Include="Core\Dtos\CommentDto.cs" />
+    <Compile Include="Core\Dtos\FollowingDto.cs" />
+    <Compile Include="Core\Dtos\PlusDto.cs" />
+    <Compile Include="Persistance\Extension\TagFunction.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612192323303_FirstMigration.cs" />
-    <Compile Include="Migrations\201612192323303_FirstMigration.Designer.cs">
+    <Compile Include="Persistance\Migrations\201612192323303_FirstMigration.cs" />
+    <Compile Include="Persistance\Migrations\201612192323303_FirstMigration.Designer.cs">
       <DependentUpon>201612192323303_FirstMigration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612220017325_AddFollowingModel.cs" />
-    <Compile Include="Migrations\201612220017325_AddFollowingModel.Designer.cs">
+    <Compile Include="Persistance\Migrations\201612220017325_AddFollowingModel.cs" />
+    <Compile Include="Persistance\Migrations\201612220017325_AddFollowingModel.Designer.cs">
       <DependentUpon>201612220017325_AddFollowingModel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Comment.cs" />
-    <Compile Include="Models\CommentPlus.cs" />
-    <Compile Include="Models\Following.cs" />
-    <Compile Include="Models\PostPlus.cs" />
-    <Compile Include="Models\PostTag.cs" />
-    <Compile Include="Models\Tag.cs" />
-    <Compile Include="Repository\CommentPlusRepository.cs" />
-    <Compile Include="Repository\CommentRepository.cs" />
-    <Compile Include="Repository\FollowingRepository.cs" />
-    <Compile Include="Repository\ICommentPlusRepository.cs" />
-    <Compile Include="Repository\ICommentRepository.cs" />
-    <Compile Include="Repository\IFollowingRepository.cs" />
-    <Compile Include="Repository\IPostPlusRepository.cs" />
-    <Compile Include="Repository\IPostRepository.cs" />
-    <Compile Include="Repository\IPostTagRepository.cs" />
-    <Compile Include="Repository\IRepository.cs" />
-    <Compile Include="Repository\ITagRepository.cs" />
-    <Compile Include="Repository\IUnitOfWork.cs" />
-    <Compile Include="Repository\PostPlusRepository.cs" />
-    <Compile Include="Repository\PostRepository.cs" />
-    <Compile Include="Repository\PostTagRepository.cs" />
-    <Compile Include="Repository\TagRepository.cs" />
-    <Compile Include="Repository\UnitOfWork.cs" />
-    <Compile Include="ViewModels\CommentFormViewModel.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Post.cs" />
+    <Compile Include="Persistance\Migrations\Configuration.cs" />
+    <Compile Include="Core\ViewModels\AccountViewModels.cs" />
+    <Compile Include="Core\Models\Comment.cs" />
+    <Compile Include="Core\Models\CommentPlus.cs" />
+    <Compile Include="Core\Models\Following.cs" />
+    <Compile Include="Core\Models\PostPlus.cs" />
+    <Compile Include="Core\Models\PostTag.cs" />
+    <Compile Include="Core\Models\Tag.cs" />
+    <Compile Include="Persistance\Repository\CommentPlusRepository.cs" />
+    <Compile Include="Persistance\Repository\CommentRepository.cs" />
+    <Compile Include="Persistance\Repository\FollowingRepository.cs" />
+    <Compile Include="Core\Repositories\ICommentPlusRepository.cs" />
+    <Compile Include="Core\Repositories\ICommentRepository.cs" />
+    <Compile Include="Core\Repositories\IFollowingRepository.cs" />
+    <Compile Include="Core\Repositories\IPostPlusRepository.cs" />
+    <Compile Include="Core\Repositories\IPostRepository.cs" />
+    <Compile Include="Core\Repositories\IPostTagRepository.cs" />
+    <Compile Include="Core\Repositories\ITagRepository.cs" />
+    <Compile Include="Core\IUnitOfWork.cs" />
+    <Compile Include="Persistance\Repository\PostPlusRepository.cs" />
+    <Compile Include="Persistance\Repository\PostRepository.cs" />
+    <Compile Include="Persistance\Repository\PostTagRepository.cs" />
+    <Compile Include="Persistance\Repository\TagRepository.cs" />
+    <Compile Include="Persistance\UnitOfWork.cs" />
+    <Compile Include="Core\ViewModels\CommentFormViewModel.cs" />
+    <Compile Include="Core\Models\IdentityModels.cs" />
+    <Compile Include="Core\ViewModels\ManageViewModels.cs" />
+    <Compile Include="Core\Models\Post.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\HomeViewModel.cs" />
-    <Compile Include="ViewModels\PostFormViewModel.cs" />
-    <Compile Include="ViewModels\TagViewModel.cs" />
+    <Compile Include="Core\ViewModels\HomeViewModel.cs" />
+    <Compile Include="Core\ViewModels\PostFormViewModel.cs" />
+    <Compile Include="Core\ViewModels\TagViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\aspnet-Mikro-20161126013923.mdf" />
@@ -401,10 +401,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612192323303_FirstMigration.resx">
+    <EmbeddedResource Include="Persistance\Migrations\201612192323303_FirstMigration.resx">
       <DependentUpon>201612192323303_FirstMigration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612220017325_AddFollowingModel.resx">
+    <EmbeddedResource Include="Persistance\Migrations\201612220017325_AddFollowingModel.resx">
       <DependentUpon>201612220017325_AddFollowingModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

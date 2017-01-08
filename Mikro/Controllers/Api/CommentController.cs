@@ -6,11 +6,11 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
-using Mikro.Dtos;
-using Mikro.Extension;
-using Mikro.Models;
-using Mikro.Repository;
-using Mikro.ViewModels;
+using Mikro.Core;
+using Mikro.Core.Dtos;
+using Mikro.Core.Models;
+using Mikro.Persistance;
+using Mikro.Persistance.Extension;
 
 namespace Mikro.Controllers.Api
 {

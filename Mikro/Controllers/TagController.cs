@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNet.Identity;
-using Mikro.Models;
-using Mikro.Repository;
-using Mikro.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Mikro.Core;
+using Mikro.Core.Models;
+using Mikro.Core.ViewModels;
 
 namespace Mikro.Controllers
 {

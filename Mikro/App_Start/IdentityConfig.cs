@@ -10,7 +10,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using Mikro.Models;
+using Mikro.Core.Models;
+using Mikro.Persistance;
 
 namespace Mikro
 {

@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
-using Mikro.Models;
-using Mikro.Repository;
-using Mikro.ViewModels;
 using System.Web.Mvc;
+using Mikro.Core;
+using Mikro.Core.ViewModels;
 
 namespace Mikro.Controllers
 {

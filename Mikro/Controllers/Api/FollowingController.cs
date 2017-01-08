@@ -5,9 +5,9 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
-using Mikro.Dtos;
-using Mikro.Models;
-using Mikro.Repository;
+using Mikro.Core;
+using Mikro.Core.Dtos;
+using Mikro.Core.Models;
 
 namespace Mikro.Controllers.Api
 {

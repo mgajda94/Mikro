@@ -4,8 +4,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
+using Mikro.Core.Models;
+using Mikro.Persistance;
 using Owin;
-using Mikro.Models;
 
 namespace Mikro
 {
